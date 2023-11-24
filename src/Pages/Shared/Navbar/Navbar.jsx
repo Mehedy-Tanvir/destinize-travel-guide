@@ -5,7 +5,7 @@ const Navbar = () => {
   const listSmall = (
     <>
       <li>
-        <Link
+        <NavLink
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -15,14 +15,12 @@ const Navbar = () => {
           }
         >
           Profile
-        </Link>
+        </NavLink>
         <ul className="p-2">
           <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
-          <li>
-            <a>Submenu 2</a>
-          </li>
+          <li>Submenu 2</li>
         </ul>
       </li>
       <li>
@@ -31,7 +29,7 @@ const Navbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "lg:text-[#4475F2] underline drop-shadow-lg normal-case font-poppins font-normal text-[16px]"
+              ? "lg:text-[#4475F2] border-2 border-[#4475F2] drop-shadow-lg normal-case font-poppins font-normal text-[16px] hover:shadow-sm hover:bg-white"
               : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
           }
           to="/"
@@ -133,9 +131,7 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
             </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
+            <li>Submenu 2</li>
           </ul>
         </details>
       </li>
@@ -250,7 +246,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="hidden md:block">
-          <ButtonPrimary>Login</ButtonPrimary>
+          <Link to="/login">
+            <ButtonPrimary>Login</ButtonPrimary>
+          </Link>
         </div>
       </div>
     </div>

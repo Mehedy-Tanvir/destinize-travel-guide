@@ -5,7 +5,9 @@ const Main = () => {
   return (
     <div className="font-poppins">
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="min-h-screen max-w-[1400px] mx-auto px-2">
+        <Outlet></Outlet>
+      </div>
     </div>
   );
 };
