@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import useAuth from "../../Hooks/useAuth";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { googleSignIn, logInUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -42,37 +52,40 @@ const Login = () => {
       .catch((error) => toast.error(error.message, { id: toastId }));
   };
 
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
   return (
-    <div className="bg-[#FEFCFB]">
+    <div className="bg-white">
       <div className="max-w-[1400px] px-2 mx-auto mb-[40px] mt-[40px]">
         <div className="hero">
           <div className="flex-col md:flex-row-reverse hero-content">
             <div className="max-w-[280px] lg:max-w-[400px]">
               <img src="" alt="" />
             </div>
-            <div className="border-2 max-w-[280px] md:max-w-[400px] shadow-xl border-[#FA7436] shrink card">
+            <div className="border-2 max-w-[280px] md:max-w-[400px] shadow-xl border-[#4475F2] shrink card">
               <form onSubmit={handleSubmit} className="card-body">
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Email</span>
-                  </label>
                   <input
                     name="email"
                     type="email"
-                    placeholder="email"
+                    placeholder="Your Email"
                     className="input input-bordered"
                     required
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Password</span>
-                  </label>
                   <div className="relative">
                     <input
                       name="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="password"
+                      placeholder="Your Password"
                       className="w-full input input-bordered"
                       required
                     />
@@ -93,13 +106,32 @@ const Login = () => {
                     )}
                   </div>
                 </div>
+                <div className="form-control">
+                  <label className="label">
+                    <LoadCanvasTemplate />
+                  </label>
+                  <input
+                    onBlur={handleValidateCaptcha}
+                    type="text"
+                    name="captcha"
+                    placeholder="Type The Captcha"
+                    className="input input-bordered"
+                  />
+                </div>
                 <div className="mt-6 form-control">
-                  <button className="bg-[#FA7436] hover:opacity-90 text-white text-3xl h-[60px] px-[20px] rounded-lg">
+                  <button
+                    disabled={disabled}
+                    className={
+                      disabled
+                        ? "btn text-3xl h-[60px] px-[20px] rounded-lg"
+                        : "bg-[#4475F2] hover:opacity-90 text-white text-3xl h-[60px] px-[20px] rounded-lg"
+                    }
+                  >
                     Login
                   </button>
                   <button
                     type="button"
-                    className="h-[40px] mt-4 w-full text-center border-2 border-[var(--google_color)] font-medium text-[var(--google_color)] rounded-3xl"
+                    className="h-[40px] mt-4 w-full text-center border-2 border-[#4475F2] font-medium text-[#222] rounded-3xl"
                     onClick={handleGoogleSignIn}
                   >
                     <div className="flex items-center justify-center gap-2">

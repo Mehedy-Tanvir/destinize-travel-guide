@@ -236,7 +236,7 @@ const Navbar = () => {
             {listSmall}
           </ul>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 drop-shadow-lg">
           <img src="/logo.png" alt="" />
           <p className="text-xl font-bold">Destinize</p>
         </div>
@@ -246,7 +246,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="hidden md:block">
-          <Link to="/login">
+          <Link className="drop-shadow-lg" to="/login">
             <ButtonPrimary>Login</ButtonPrimary>
           </Link>
         </div>

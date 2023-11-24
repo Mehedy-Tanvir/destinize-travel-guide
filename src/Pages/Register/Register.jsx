@@ -57,60 +57,48 @@ const Register = () => {
       .catch((error) => toast.error(error.message));
   };
   return (
-    <div className="bg-[#FEFCFB]">
+    <div className="bg-white">
       <div className="max-w-[1400px] px-2 mx-auto mt-[40px] mb-[40px]">
         <div className="hero">
           <div className="flex-col md:flex-row-reverse hero-content">
             <div className="max-w-[280px] lg:max-w-[400px]">
               <img src="" alt="" />
             </div>
-            <div className="border-2 shadow-xl max-w-[280px] md:max-w-[400px] shrink border-[#FA7436] card">
+            <div className="border-2 shadow-xl max-w-[280px] md:max-w-[400px] shrink border-[#4475F2] card">
               <form onSubmit={handleSubmit} className="card-body">
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Image</span>
-                  </label>
                   <input
                     name="image"
                     type="text"
-                    placeholder="image url"
+                    placeholder="Your Image URL"
                     className="input input-bordered"
                     required
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Name</span>
-                  </label>
                   <input
                     name="name"
                     type="text"
-                    placeholder="name"
+                    placeholder="Your Name"
                     className="input input-bordered"
                     required
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Email</span>
-                  </label>
                   <input
                     name="email"
                     type="email"
-                    placeholder="email"
+                    placeholder="Your Email"
                     className="input input-bordered"
                     required
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Password</span>
-                  </label>
                   <div className="relative">
                     <input
                       name="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="password"
+                      placeholder="Your Password"
                       className="w-full input input-bordered"
                       required
                     />
@@ -133,13 +121,13 @@ const Register = () => {
                 </div>
                 <div className="mt-6 form-control">
                   <input
-                    className="bg-[#FA7436]  hover:opacity-90 text-white text-3xl h-[60px] px-[20px] rounded-lg"
+                    className="bg-[#4475F2]  hover:opacity-90 text-white text-3xl h-[60px] px-[20px] rounded-lg"
                     type="submit"
                     value="Register"
                   />
                   <button
                     type="button"
-                    className="h-[40px] mt-4 w-full text-center border-2 border-[var(--google_color)] font-medium text-[var(--google_color)] rounded-3xl"
+                    className="h-[40px] mt-4 w-full text-center border-2 border-[#4475F2] font-medium text-[#222] rounded-3xl"
                     onClick={handleGoogleSignIn}
                   >
                     <div className="flex items-center justify-center gap-2">

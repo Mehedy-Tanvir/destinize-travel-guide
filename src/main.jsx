@@ -9,8 +9,10 @@ import AuthProvider from "./Provider/AuthProvider.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <Toaster />
-      <RouterProvider router={Routes} />
+      <div className="overflow-x-hidden">
+        <Toaster />
+        <RouterProvider router={Routes} />
+      </div>
     </AuthProvider>
   </React.StrictMode>
 );
