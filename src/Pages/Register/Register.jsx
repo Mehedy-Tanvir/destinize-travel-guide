@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -58,6 +59,9 @@ const Register = () => {
   };
   return (
     <div className="bg-white">
+      <Helmet>
+        <title>Destinize | Register</title>
+      </Helmet>
       <div className="max-w-[1400px] px-2 mx-auto mt-[40px] mb-[40px]">
         <div className="hero">
           <div className="flex-col md:flex-row-reverse hero-content">

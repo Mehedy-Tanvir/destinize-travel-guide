@@ -8,6 +8,7 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,6 +64,9 @@ const Login = () => {
 
   return (
     <div className="bg-white">
+      <Helmet>
+        <title>Destinize | Login</title>
+      </Helmet>
       <div className="max-w-[1400px] px-2 mx-auto mb-[40px] mt-[40px]">
         <div className="hero">
           <div className="flex-col md:flex-row-reverse hero-content">
