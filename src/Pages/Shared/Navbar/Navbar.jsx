@@ -199,7 +199,7 @@ const Navbar = () => {
               <img
                 className="h-[24px] w-[24px] object-cover object-center rounded-[50%] mr-2"
                 src={
-                  user?.photoURL
+                  !loading && user?.photoURL
                     ? user.photoURL
                     : "https://imagizer.imageshack.com/img923/6317/jRVw55.png"
                 }
@@ -329,7 +329,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 max-w-[1400px] mx-auto px-2">
+    <div className="navbar bg-[#FEFCFB] max-w-[1400px] mx-auto px-2">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

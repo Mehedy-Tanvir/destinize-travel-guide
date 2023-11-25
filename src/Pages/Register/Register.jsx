@@ -4,23 +4,15 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { googleSignIn, registerUser, profileUpdate } = useAuth();
+  const { registerUser, profileUpdate } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const location = useLocation();
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then(() => {
-        if (location.state) {
-          navigate(location.state);
-        } else {
-          navigate("/");
-        }
-      })
-      .catch((error) => console.log(error));
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -45,20 +37,39 @@ const Register = () => {
             e.target.image.value = "";
             e.target.email.value = "";
             e.target.password.value = "";
-
-            toast.success("User registered successfully", { id: toastId });
-            if (location.state) {
-              navigate(location.state);
-            } else {
-              navigate("/");
-            }
+            const userInfo = {
+              name,
+              email,
+              image,
+              role: "Tourist",
+            };
+            axiosPublic
+              .post("/users", userInfo)
+              .then((res) => {
+                console.log(res.data);
+                if (location.state) {
+                  navigate(location.state);
+                } else {
+                  navigate("/");
+                }
+                toast.success("User registered successfully", { id: toastId });
+              })
+              .catch((error) => {
+                console.log(error);
+                toast.error("User was not saved at the database", {
+                  id: toastId,
+                });
+              });
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            console.log(error);
+            toast.error("User was not registered", { id: toastId });
+          });
       })
-      .catch((error) => toast.error(error.message));
+      .catch((error) => toast.error(error.message, { id: toastId }));
   };
   return (
-    <div className="bg-white">
+    <div className="bg-[#FEFCFB]">
       <Helmet>
         <title>Destinize | Register</title>
       </Helmet>
@@ -129,20 +140,7 @@ const Register = () => {
                     type="submit"
                     value="Register"
                   />
-                  <button
-                    type="button"
-                    className="h-[40px] mt-4 w-full text-center border-2 border-[#4475F2] font-medium text-[#222] rounded-3xl"
-                    onClick={handleGoogleSignIn}
-                  >
-                    <div className="flex items-center justify-center gap-2">
-                      <img
-                        className="w-[16px] h-[16px]"
-                        src="/google.png"
-                        alt=""
-                      />
-                      <span>Sign In With Google</span>
-                    </div>
-                  </button>
+                  <SocialLogin></SocialLogin>
                   <p className="mt-4 font-medium text-center text-gray-600">
                     Already have an account?{" "}
                     <Link to="/login">

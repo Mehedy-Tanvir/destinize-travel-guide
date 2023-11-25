@@ -9,10 +9,11 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { googleSignIn, logInUser } = useAuth();
+  const { logInUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [disabled, setDisabled] = useState(true);
@@ -20,18 +21,6 @@ const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
-
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then(() => {
-        if (location.state) {
-          navigate(location.state);
-        } else {
-          navigate("/");
-        }
-      })
-      .catch((error) => console.log(error));
-  };
 
   const handleSubmit = (e) => {
     const toastId = toast.loading("Logging in...");
@@ -63,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#FEFCFB]">
       <Helmet>
         <title>Destinize | Login</title>
       </Helmet>
@@ -133,20 +122,7 @@ const Login = () => {
                   >
                     Login
                   </button>
-                  <button
-                    type="button"
-                    className="h-[40px] mt-4 w-full text-center border-2 border-[#4475F2] font-medium text-[#222] rounded-3xl"
-                    onClick={handleGoogleSignIn}
-                  >
-                    <div className="flex items-center justify-center gap-2">
-                      <img
-                        className="w-[16px] h-[16px]"
-                        src="/google.png"
-                        alt=""
-                      />
-                      <span>Sign In With Google</span>
-                    </div>
-                  </button>
+                  <SocialLogin></SocialLogin>
                   <p className="mt-4 font-medium text-center text-gray-600">
                     New to this site?{" "}
                     <Link to="/register">
