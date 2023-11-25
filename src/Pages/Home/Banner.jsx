@@ -24,7 +24,7 @@ const Banner = () => {
                 duration: "2",
                 delay: "1",
               }}
-              className="text-[64px] text-[#24445D] font-volkhov font-bold"
+              className="text-[38px] md:text-[64px] text-[#24445D] font-volkhov font-bold"
             >
               Embark on an unforgettable{" "}
               <span className="text-[#4475F2]">adventure</span> with us.

@@ -2,6 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import ButtonPrimary from "../../../Components/ButtonPrimary/ButtonPrimary";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { CgProfile } from "react-icons/cg";
+import { MdEmail } from "react-icons/md";
+import { MdDashboardCustomize } from "react-icons/md";
+import { MdOutlineLocalOffer } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
 
 const Navbar = () => {
   const { logoutUser, user, loading } = useAuth();
@@ -15,23 +20,6 @@ const Navbar = () => {
   };
   const listSmall = (
     <>
-      {/* {!loading && user && (
-        <li className="md:ml-0 text-[var(--body_color)] text-[16px]">
-          <div className="flex flex-col items-start justify-center gap-2 lg:items-center lg:flex-row">
-            <img
-              className="h-[24px] w-[24px] object-cover object-center rounded-[50%] mr-2"
-              src={
-                user?.photoURL
-                  ? user.photoURL
-                  : "https://imagizer.imageshack.com/img923/6317/jRVw55.png"
-              }
-              alt=""
-            />
-            <p className="font-medium normal-case">{user?.displayName}</p>
-          </div>
-        </li>
-      )} */}
-
       {!loading && user && (
         <li>
           <NavLink
@@ -65,7 +53,7 @@ const Navbar = () => {
                     ? "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
                     : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
                 }
-                to="/dashboard"
+                to="/dashboard/myProfile"
               >
                 Dashboard
               </NavLink>
@@ -199,7 +187,7 @@ const Navbar = () => {
               <img
                 className="h-[24px] w-[24px] object-cover object-center rounded-[50%] mr-2"
                 src={
-                  !loading && user?.photoURL
+                  user?.photoURL
                     ? user.photoURL
                     : "https://imagizer.imageshack.com/img923/6317/jRVw55.png"
                 }
@@ -207,25 +195,25 @@ const Navbar = () => {
               />
             </summary>
             <ul className="p-4">
-              <li className="text-[18px] font-semibold text-black">
-                Name: {user?.displayName}
+              <li className="text-[18px] font-medium">
+                <div style={{ pointerEvents: "none" }} className="">
+                  <CgProfile className="text-[#4475F2]" />{" "}
+                  <p>{user?.displayName}</p>
+                </div>
               </li>
-              <li className="text-[18px] font-semibold text-black">
-                Email: {user?.email}
+              <li className="text-[18px] font-medium">
+                <div style={{ pointerEvents: "none" }}>
+                  <MdEmail className="text-[#4475F2]" /> <p>{user?.email}</p>
+                </div>
               </li>
               <li>
-                <NavLink
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "lg:text-[#4475F2] border-2 border-[#4475F2] drop-shadow-lg normal-case font-poppins font-normal text-[16px] hover:shadow-sm hover:bg-white"
-                      : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
-                  }
-                  to="/dashboard"
-                >
-                  Dashboard
-                </NavLink>
+                <Link to="/dashboard/myProfile">
+                  {" "}
+                  <div className="flex items-center justify-center gap-2 font-medium text-[18px]">
+                    <MdDashboardCustomize className="text-[#4475F2]" />{" "}
+                    <p>Dashboard</p>
+                  </div>
+                </Link>
               </li>
               <li>
                 <NavLink
@@ -238,17 +226,20 @@ const Navbar = () => {
                   }
                   to="/offers"
                 >
-                  Offers
+                  <div className="flex items-center justify-center gap-2 font-medium text-[18px]">
+                    <MdOutlineLocalOffer className="text-[#4475F2]" />{" "}
+                    <p>Offers</p>
+                  </div>
                 </NavLink>
               </li>
 
-              <li>
-                <Link
-                  onClick={handleLogout}
-                  className="hidden drop-shadow-lg md:block"
-                >
-                  Logout
-                </Link>
+              <li
+                onClick={handleLogout}
+                className="hidden drop-shadow-lg md:block"
+              >
+                <div className="flex items-center justify-start gap-2 font-medium text-[18px]">
+                  <IoLogOut className="text-[#4475F2]" /> <p>Logout</p>
+                </div>
               </li>
             </ul>
           </details>
@@ -350,7 +341,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content gap-2 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="z-20 gap-2 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             {listSmall}
           </ul>
@@ -361,7 +352,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="hidden navbar-center lg:flex">
-        <ul className="gap-2 px-1 menu menu-horizontal">{listLarge}</ul>
+        <ul className="z-20 gap-2 px-1 menu menu-horizontal">{listLarge}</ul>
       </div>
       <div className="navbar-end">
         {!loading && user && (
