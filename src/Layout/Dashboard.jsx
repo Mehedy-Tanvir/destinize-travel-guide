@@ -6,49 +6,66 @@ import { FaHome } from "react-icons/fa";
 
 const Dashboard = () => {
   return (
-    <div className="drawer lg:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="flex flex-col items-center justify-center drawer-content">
-        {/* Page content here */}
-        <Outlet></Outlet>
-        <label
-          htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+    <>
+      <label
+        htmlFor="my-drawer-2"
+        className="mt-[10px] ml-4 bg-slate-300 btn drawer-button lg:hidden"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          Open drawer
-        </label>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </label>
+      <div className="h-screen drawer lg:drawer-open">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="flex flex-col items-center justify-center overflow-y-auto drawer-content">
+          {/* Page content here */}
+          <div className="mt-[200px] lg:mt-[100px]">
+            <Outlet></Outlet>
+          </div>
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer-2"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="min-h-full p-4 menu w-80 bg-base-200 text-base-content">
+            {/* Sidebar content here */}
+            <li className="text-xl font-medium">
+              <Link to="/dashboard/myProfile">
+                <CgProfile className="text-[#4475F2]" /> My Profile
+              </Link>
+            </li>
+            <li className="text-xl font-medium">
+              <Link to="/dashboard/myBookings">
+                <BsCartCheckFill className="text-[#4475F2]" /> My Bookings
+              </Link>
+            </li>
+            <li className="text-xl font-medium">
+              <Link to="/dashboard/myWishlist">
+                <FaHeart className="text-[#4475F2]" /> My Wishlist
+              </Link>
+            </li>
+            <li className="text-xl font-medium">
+              <Link to="/">
+                <FaHome className="text-[#4475F2]" /> Home
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className="drawer-side">
-        <label
-          htmlFor="my-drawer-2"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <ul className="min-h-full p-4 menu w-80 bg-base-200 text-base-content">
-          {/* Sidebar content here */}
-          <li className="text-xl">
-            <Link to="/dashboard/myProfile">
-              <CgProfile /> My Profile
-            </Link>
-          </li>
-          <li className="text-xl">
-            <Link to="/dashboard/myBookings">
-              <BsCartCheckFill /> My Bookings
-            </Link>
-          </li>
-          <li className="text-xl">
-            <Link to="/dashboard/myWishlist">
-              <FaHeart /> My Wishlist
-            </Link>
-          </li>
-          <li className="text-xl">
-            <Link to="/">
-              <FaHome /> Home
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </>
   );
 };
 
