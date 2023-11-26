@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useUtils from "../../Utils/useUtils";
 import Spinner from "../Shared/Spinner/Spinner";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const ManageUsers = () => {
   const { getAllUsers } = useUtils();
+  const axiosSecure = useAxiosSecure();
   // Queries
   const {
     data: allUsers,
@@ -14,6 +17,19 @@ const ManageUsers = () => {
     queryKey: ["allUsers"],
     queryFn: getAllUsers,
   });
+  const handleRole = (role, id) => {
+    axiosSecure
+      .patch(`/roles/${id}`, { role })
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Role changed successfully");
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Role changing was not successful");
+      });
+  };
 
   return (
     <>
@@ -60,6 +76,7 @@ const ManageUsers = () => {
                     <td>
                       <div className="flex flex-col gap-2 lg:flex-row">
                         <button
+                          onClick={() => handleRole("Admin", user?._id)}
                           disabled={
                             user?.role === "Admin" ||
                             user?.role === "Tour Guide"
@@ -74,6 +91,7 @@ const ManageUsers = () => {
                           Make Admin
                         </button>
                         <button
+                          onClick={() => handleRole("Tour Guide", user?._id)}
                           disabled={
                             user?.role === "Admin" ||
                             user?.role === "Tour Guide"
