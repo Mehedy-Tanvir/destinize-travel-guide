@@ -19,12 +19,11 @@ const ManageUsers = () => {
     <>
       {isLoading && <Spinner></Spinner>}
       {!isLoading && allUsers && (
-        <>
-          {" "}
+        <div className="px-2 mt-[150px] lg:mt-0 max-w-[1400px] mx-auto overflow-x-auto">
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             Manage <span className="text-[#4475F2]">Users</span>
           </h1>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[350px] md:w-full px-2">
             <table className="table table-zebra">
               {/* head */}
               <thead>
@@ -95,7 +94,7 @@ const ManageUsers = () => {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )}
     </>
   );
