@@ -7,6 +7,12 @@ import Dashboard from "../Layout/Dashboard";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import MyWishlist from "../Pages/MyWishlist/MyWishlist";
+import MyAssignedTours from "../Pages/MyAssignedTours/MyAssignedTours";
+import AddPackage from "../Pages/AddPackage/AddPackage";
+import ManageUsers from "../Pages/ManageUsers/ManageUsers";
+import PrivateRoutes from "./PrivateRoutes";
+import AdminRoutes from "./AdminRoutes";
+import TourGuideRoutes from "./TourGuideRoutes";
 
 const Routes = createBrowserRouter([
   {
@@ -29,20 +35,65 @@ const Routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoutes>
+        <Dashboard></Dashboard>
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "myProfile",
-        index: true,
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRoutes>
+            <MyProfile></MyProfile>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "myBookings",
-        element: <MyBookings></MyBookings>,
+        element: (
+          <PrivateRoutes>
+            <MyBookings></MyBookings>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "myWishlist",
-        element: <MyWishlist></MyWishlist>,
+        element: (
+          <PrivateRoutes>
+            <MyWishlist></MyWishlist>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "myAssignedTours",
+        element: (
+          <PrivateRoutes>
+            <TourGuideRoutes>
+              <MyAssignedTours></MyAssignedTours>
+            </TourGuideRoutes>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "addPackage",
+        element: (
+          <PrivateRoutes>
+            <AdminRoutes>
+              <AddPackage></AddPackage>
+            </AdminRoutes>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <PrivateRoutes>
+            <AdminRoutes>
+              <ManageUsers></ManageUsers>
+            </AdminRoutes>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

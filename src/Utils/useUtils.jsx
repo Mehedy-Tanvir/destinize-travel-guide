@@ -9,8 +9,12 @@ const useUtils = () => {
     const result = await axiosSecure(`/users?email=${user?.email}`);
     return result.data;
   };
+  const getAllUsers = async () => {
+    const result = await axiosSecure("allUsers");
+    return result.data;
+  };
 
-  const myFunctions = { getMyProfile };
+  const myFunctions = { getMyProfile, getAllUsers };
   return myFunctions;
 };
 

@@ -3,8 +3,13 @@ import { CgProfile } from "react-icons/cg";
 import { BsCartCheckFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { MdOutlineWorkHistory } from "react-icons/md";
+import { MdOutlinePostAdd } from "react-icons/md";
+import { FaUsersCog } from "react-icons/fa";
+import useRole from "../Hooks/useRole";
 
 const Dashboard = () => {
+  const [isRole, isRoleLoading] = useRole();
   return (
     <>
       <label
@@ -47,16 +52,42 @@ const Dashboard = () => {
                 <CgProfile className="text-[#4475F2]" /> My Profile
               </Link>
             </li>
-            <li className="text-xl font-medium">
-              <Link to="/dashboard/myBookings">
-                <BsCartCheckFill className="text-[#4475F2]" /> My Bookings
-              </Link>
-            </li>
-            <li className="text-xl font-medium">
-              <Link to="/dashboard/myWishlist">
-                <FaHeart className="text-[#4475F2]" /> My Wishlist
-              </Link>
-            </li>
+            {!isRoleLoading && isRole === "Tourist" && (
+              <li className="text-xl font-medium">
+                <Link to="/dashboard/myBookings">
+                  <BsCartCheckFill className="text-[#4475F2]" /> My Bookings
+                </Link>
+              </li>
+            )}
+            {!isRoleLoading && isRole === "Tourist" && (
+              <li className="text-xl font-medium">
+                <Link to="/dashboard/myWishlist">
+                  <FaHeart className="text-[#4475F2]" /> My Wishlist
+                </Link>
+              </li>
+            )}
+            {!isRoleLoading && isRole === "Tour Guide" && (
+              <li className="text-xl font-medium">
+                <Link to="/dashboard/myAssignedTours">
+                  <MdOutlineWorkHistory className="text-[#4475F2]" /> My
+                  Assigned Tours
+                </Link>
+              </li>
+            )}
+            {!isRoleLoading && isRole === "Admin" && (
+              <li className="text-xl font-medium">
+                <Link to="/dashboard/addPackage">
+                  <MdOutlinePostAdd className="text-[#4475F2]" /> Add Package
+                </Link>
+              </li>
+            )}
+            {!isRoleLoading && isRole === "Admin" && (
+              <li className="text-xl font-medium">
+                <Link to="/dashboard/manageUsers">
+                  <FaUsersCog className="text-[#4475F2]" /> Manage Users
+                </Link>
+              </li>
+            )}
             <li className="text-xl font-medium">
               <Link to="/">
                 <FaHome className="text-[#4475F2]" /> Home
