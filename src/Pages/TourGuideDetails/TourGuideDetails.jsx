@@ -20,7 +20,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const TourGuideDetails = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { getMyProfile } = useUtils();
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
@@ -82,7 +82,7 @@ const TourGuideDetails = () => {
   return (
     <div>
       {!isLoading && tourGuide && (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center mb-10">
           <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">
             Tour <span className="text-[#4475F2]">Guide</span>
           </h1>
@@ -123,71 +123,76 @@ const TourGuideDetails = () => {
             </div>
           </div>
           <div>
-            <div>
-              <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">
-                Give <span className="text-[#4475F2]">Review</span>
-              </h1>
-              <div className="flex flex-col items-center justify-center gap-2 mb-5">
-                <img
-                  className="h-[50px] w-[50px] object-cover object-center rounded-[50%] mr-2"
-                  src={myProfile?.image}
-                  alt=""
-                />
-                <p className="text-2xl font-medium">{myProfile?.name}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <form className="mb-10" onSubmit={handleSubmit}>
-                  <div className="flex flex-col gap-2 md:items-center md:justify-center md:flex-row">
-                    <label className="text-2xl" htmlFor="rating">
-                      Rating:
-                    </label>
-                    {/* Rating Stars */}
-                    <div className="text-3xl">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <span
-                          key={star}
-                          onClick={() => handleRatingChange(star)}
-                          style={{
-                            cursor: "pointer",
-                            color: star <= rating ? "gold" : "gray",
-                          }}
-                        >
-                          ★
-                        </span>
-                      ))}
+            {!loading && user && (
+              <div>
+                <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">
+                  Give <span className="text-[#4475F2]">Review</span>
+                </h1>
+                <div className="flex flex-col items-center justify-center gap-2 mb-5">
+                  <img
+                    className="h-[50px] w-[50px] object-cover object-center rounded-[50%] mr-2"
+                    src={myProfile?.image}
+                    alt=""
+                  />
+                  <p className="text-2xl font-medium">{myProfile?.name}</p>
+                </div>
+                <div className="flex items-center justify-center">
+                  <form className="mb-10" onSubmit={handleSubmit}>
+                    <div className="flex flex-col gap-2 md:items-center md:justify-center md:flex-row">
+                      <label className="text-2xl" htmlFor="rating">
+                        Rating:
+                      </label>
+                      {/* Rating Stars */}
+                      <div className="text-3xl">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span
+                            key={star}
+                            onClick={() => handleRatingChange(star)}
+                            style={{
+                              cursor: "pointer",
+                              color: star <= rating ? "gold" : "gray",
+                            }}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-2xl" htmlFor="comment">
-                      Comment:
-                    </label>
-                    <textarea
-                      className="w-full max-w-xs textarea textarea-bordered textarea-sm"
-                      placeholder="Your Review"
-                      required
-                      id="comment"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    ></textarea>
-                  </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-2xl" htmlFor="comment">
+                        Comment:
+                      </label>
+                      <textarea
+                        className="w-full max-w-xs textarea textarea-bordered textarea-sm"
+                        placeholder="Your Review"
+                        required
+                        id="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      ></textarea>
+                    </div>
 
-                  <div>
-                    <button
-                      className="w-full mt-4 text-xl text-white bg-blue-500 btn hover:bg-blue-400"
-                      type="submit"
-                    >
-                      Review
-                    </button>
-                  </div>
-                </form>
+                    <div>
+                      <button
+                        className="w-full mt-4 text-xl text-white bg-blue-500 btn hover:bg-blue-400"
+                        type="submit"
+                      >
+                        Review
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
       {!reviewLoading && reviews.length > 0 && (
         <div className="mb-[100px]">
+          <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">
+            <span className="text-[#4475F2]">Reviews</span>
+          </h1>
           <AwesomeSlider>
             {reviews.map((review, idx) => (
               <div key={idx} className="flex flex-col items-center">
