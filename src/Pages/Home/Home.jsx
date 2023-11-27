@@ -3,16 +3,12 @@ import Banner from "./Banner";
 import TourGuideCard from "./TourGuideCard";
 import useUtils from "../../Utils/useUtils";
 import { useQuery } from "@tanstack/react-query";
+import TourType from "./TourType";
 
 const Home = () => {
   const { getTourGuides } = useUtils();
   // Queries
-  const {
-    data: tourGuides,
-    refetch,
-    error,
-    isLoading,
-  } = useQuery({
+  const { data: tourGuides, isLoading } = useQuery({
     queryKey: ["allUsers"],
     queryFn: getTourGuides,
   });
@@ -34,6 +30,7 @@ const Home = () => {
           </div>
         </div>
       )}
+      <TourType></TourType>
     </>
   );
 };

@@ -67,7 +67,6 @@ const MyProfile = () => {
   const {
     data: myProfile,
     refetch,
-    error,
     isLoading,
   } = useQuery({
     queryKey: ["myProfile", user?.email],

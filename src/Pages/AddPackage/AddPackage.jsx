@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const AddPackage = () => {
   const axiosSecure = useAxiosSecure();
@@ -58,8 +59,14 @@ const AddPackage = () => {
     console.log("Tour Data Submitted:", tourData);
     axiosSecure
       .post("/tours", tourData)
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error));
+      .then((res) => {
+        toast.success("Package added successfully");
+        console.log(res.data);
+      })
+      .catch((error) => {
+        toast.error("Package was not added");
+        console.log(error);
+      });
   };
 
   return (

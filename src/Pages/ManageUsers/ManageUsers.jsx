@@ -11,7 +11,6 @@ const ManageUsers = () => {
   const {
     data: allUsers,
     refetch,
-    error,
     isLoading,
   } = useQuery({
     queryKey: ["allUsers"],

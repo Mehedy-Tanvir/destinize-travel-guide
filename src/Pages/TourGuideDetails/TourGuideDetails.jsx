@@ -36,7 +36,11 @@ const TourGuideDetails = () => {
   });
 
   // Queries
-  const { data: reviews, isLoading: reviewLoading } = useQuery({
+  const {
+    data: reviews,
+    isLoading: reviewLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["reviews", id],
     enabled: Boolean(id),
     queryFn: async () => {
@@ -72,6 +76,7 @@ const TourGuideDetails = () => {
       .then((res) => {
         toast.success("Your review was posted");
         console.log(res.data);
+        refetch();
       })
       .catch((error) => {
         toast.error("Your review was not posted");
