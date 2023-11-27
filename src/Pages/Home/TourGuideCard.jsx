@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const TourGuideCard = ({ guide }) => {
   return (
-    <div className="flex w-[300px] h-[400px] border-2 p-[20px] rounded-3xl flex-col items-center gap-4 shadow-lg">
+    <div className="flex w-[300px] h-[430px] border-2 p-[20px] rounded-3xl flex-col items-center gap-4 shadow-lg">
       <img
         className="w-[150px] rounded-[100%] object-cover object-center border-2 border-black h-[150px]"
         src={guide?.image}
@@ -18,9 +19,11 @@ const TourGuideCard = ({ guide }) => {
           {guide?.workExperience}
         </h1>
       </div>
-      <button className="text-white bg-blue-500 btn hover:bg-blue-400">
-        View Details
-      </button>
+      <Link to={`/tourGuide/${guide?._id}`}>
+        <button className="text-white bg-blue-500 btn hover:bg-blue-400">
+          View Details
+        </button>
+      </Link>
     </div>
   );
 };

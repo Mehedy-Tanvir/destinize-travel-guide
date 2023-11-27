@@ -19,8 +19,17 @@ const useUtils = () => {
     const result = await axiosPublic("/tourGuides");
     return result.data;
   };
+  const getTourGuide = async (id) => {
+    const result = await axiosPublic(`/tourGuides/${id}`);
+    return result.data;
+  };
 
-  const myFunctions = { getMyProfile, getAllUsers, getTourGuides };
+  const myFunctions = {
+    getMyProfile,
+    getAllUsers,
+    getTourGuides,
+    getTourGuide,
+  };
   return myFunctions;
 };
 

@@ -23,11 +23,11 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       {!isLoading && tourGuides && (
-        <div>
+        <div className="mb-10">
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             Our <span className="text-[#4475F2]">Tour Guides</span>
           </h1>
-          <div className="grid items-center justify-center grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid items-center justify-center grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {tourGuides.map((guide, idx) => (
               <TourGuideCard key={idx} guide={guide}></TourGuideCard>
             ))}

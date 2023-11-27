@@ -13,6 +13,7 @@ import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import PrivateRoutes from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import TourGuideRoutes from "./TourGuideRoutes";
+import TourGuideDetails from "../Pages/TourGuideDetails/TourGuideDetails";
 
 const Routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const Routes = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+      {
+        path: "tourGuide/:id",
+        element: <TourGuideDetails></TourGuideDetails>,
       },
     ],
   },
