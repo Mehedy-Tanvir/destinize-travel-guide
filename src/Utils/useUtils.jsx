@@ -1,8 +1,10 @@
 import useAuth from "../Hooks/useAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const useUtils = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
   const getMyProfile = async () => {
@@ -10,11 +12,15 @@ const useUtils = () => {
     return result.data;
   };
   const getAllUsers = async () => {
-    const result = await axiosSecure("allUsers");
+    const result = await axiosSecure("/allUsers");
+    return result.data;
+  };
+  const getTourGuides = async () => {
+    const result = await axiosPublic("/tourGuides");
     return result.data;
   };
 
-  const myFunctions = { getMyProfile, getAllUsers };
+  const myFunctions = { getMyProfile, getAllUsers, getTourGuides };
   return myFunctions;
 };
 

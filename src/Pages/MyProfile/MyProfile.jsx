@@ -30,14 +30,15 @@ const MyProfile = () => {
     const form = e.target;
     const image = form.guideImage.value;
     const name = form.guideName.value;
-    const contactDetails = form.contactDetails.value;
+    const phone = form.phone.value;
+    const address = form.address.value;
     const education = form.education.value;
     const skills = form.skills.value;
     const workExperience = form.workExperience.value;
     const user = {
       name,
       image,
-      contactDetails,
+      contactDetails: { phone, address },
       education,
       skills,
       workExperience,
@@ -48,6 +49,7 @@ const MyProfile = () => {
       .then((res) => {
         console.log(res.data);
         toast.success("Profile updated successfully");
+        refetch();
       })
       .catch((error) => {
         console.log(error);
@@ -157,12 +159,20 @@ const MyProfile = () => {
                     <label className="label">
                       <span className="label-text">Contact Details</span>
                     </label>
+                    <input
+                      name="phone"
+                      type="text"
+                      defaultValue={myProfile?.contactDetails?.phone || ""}
+                      className="mb-2 input input-bordered"
+                      required
+                      placeholder="Enter Phone Number"
+                    />
                     <textarea
                       className="w-full max-w-xs textarea textarea-bordered textarea-lg"
-                      placeholder="Contact Details"
+                      placeholder="Enter Address"
                       required
-                      name="contactDetails"
-                      defaultValue={myProfile?.contactDetails || ""}
+                      name="address"
+                      defaultValue={myProfile?.contactDetails?.address || ""}
                     ></textarea>
                   </div>
                   <div className="form-control">
