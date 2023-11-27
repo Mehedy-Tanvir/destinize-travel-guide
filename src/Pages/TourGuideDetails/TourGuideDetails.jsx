@@ -8,16 +8,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { MdOutlineWorkHistory } from "react-icons/md";
+import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import useUtils from "../../Utils/useUtils";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const TourGuideDetails = () => {
+  const { user } = useAuth();
+  const { getMyProfile } = useUtils();
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   // Queries
-  const {
-    data: tourGuide,
-    error,
-    isLoading,
-  } = useQuery({
+  const { data: tourGuide, isLoading } = useQuery({
     queryKey: ["tourGuide", id],
     enabled: Boolean(id),
     queryFn: async () => {
@@ -25,7 +29,41 @@ const TourGuideDetails = () => {
       return result.data;
     },
   });
-  console.log(error);
+
+  const { data: myProfile } = useQuery({
+    queryKey: ["myProfileForReview", user?.email],
+    queryFn: getMyProfile,
+  });
+
+  const [rating, setRating] = useState(1); // Initial rating state
+  const [comment, setComment] = useState("");
+
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setRating(1);
+    setComment("");
+    const review = {
+      tourGuideId: tourGuide._id,
+      reviewerId: myProfile._id,
+      rating,
+      comment,
+    };
+    axiosSecure
+      .post("/reviews", review)
+      .then((res) => {
+        toast.success("Your review was posted");
+        console.log(res.data);
+      })
+      .catch((error) => {
+        toast.error("Your review was not posted");
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       {!isLoading && tourGuide && (
@@ -69,8 +107,69 @@ const TourGuideDetails = () => {
               </div>
             </div>
           </div>
+          <div>
+            <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">
+              Give <span className="text-[#4475F2]">Review</span>
+            </h1>
+            <div className="flex flex-col items-center justify-center gap-2 mb-5">
+              <img
+                className="h-[50px] w-[50px] object-cover object-center rounded-[50%] mr-2"
+                src={myProfile?.image}
+                alt=""
+              />
+              <p className="text-2xl font-medium">{myProfile?.name}</p>
+            </div>
+            <div className="flex items-center justify-center">
+              <form className="mb-10" onSubmit={handleSubmit}>
+                <div className="flex flex-col gap-2 md:items-center md:justify-center md:flex-row">
+                  <label className="text-2xl" htmlFor="rating">
+                    Rating:
+                  </label>
+                  {/* Rating Stars */}
+                  <div className="text-3xl">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span
+                        key={star}
+                        onClick={() => handleRatingChange(star)}
+                        style={{
+                          cursor: "pointer",
+                          color: star <= rating ? "gold" : "gray",
+                        }}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-2xl" htmlFor="comment">
+                    Comment:
+                  </label>
+                  <textarea
+                    className="w-full max-w-xs textarea textarea-bordered textarea-sm"
+                    placeholder="Your Review"
+                    required
+                    id="comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  ></textarea>
+                </div>
+
+                <div>
+                  <button
+                    className="w-full mt-4 text-xl text-white bg-blue-500 btn hover:bg-blue-400"
+                    type="submit"
+                  >
+                    Review
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       )}
+
       {isLoading && <Spinner></Spinner>}
       {!isLoading && !tourGuide && (
         <div className="flex items-center justify-center">
