@@ -4,6 +4,7 @@ import TourGuideCard from "./TourGuideCard";
 import useUtils from "../../Utils/useUtils";
 import { useQuery } from "@tanstack/react-query";
 import TourType from "./TourType";
+import Overview from "./Overview";
 
 const Home = () => {
   const { getTourGuides } = useUtils();
@@ -30,6 +31,7 @@ const Home = () => {
           </div>
         </div>
       )}
+      <Overview></Overview>
       <TourType></TourType>
     </>
   );
