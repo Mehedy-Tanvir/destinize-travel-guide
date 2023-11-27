@@ -3,6 +3,12 @@ import useUtils from "../../Utils/useUtils";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { MdEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaGraduationCap } from "react-icons/fa6";
+import { GiSkills } from "react-icons/gi";
+import { MdOutlineWorkHistory } from "react-icons/md";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -75,21 +81,63 @@ const MyProfile = () => {
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             My <span className="text-[#4475F2]">Profile</span>
           </h1>
-          <div className="flex items-center justify-center">
-            <div className="flex border-2 p-[20px] rounded-3xl flex-col items-center justify-center gap-4 shadow-lg">
-              <img
-                className="w-[150px] rounded-[100%] object-cover object-center border-2 border-black h-[150px]"
-                src={myProfile?.image}
-                alt=""
-              />
-              <div className="text-center">
-                <h1 className="text-2xl font-semibold">
-                  Name: {myProfile?.name}
-                </h1>
-                <h1 className="text-[#666]">Email: {myProfile?.email}</h1>
+          {!isLoading && myProfile?.role === "Tourist" && (
+            <div className="flex items-center justify-center">
+              <div className="flex border-2 p-[20px] rounded-3xl flex-col items-center justify-center gap-4 shadow-lg">
+                <img
+                  className="w-[150px] rounded-[100%] object-cover object-center border-2 border-black h-[150px]"
+                  src={myProfile?.image}
+                  alt=""
+                />
+                <div className="text-center">
+                  <h1 className="text-2xl font-semibold">
+                    Name: {myProfile?.name}
+                  </h1>
+                  <h1 className="text-[#666]">Email: {myProfile?.email}</h1>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+          {!isLoading && myProfile?.role === "Tour Guide" && (
+            <div className="flex flex-col items-center justify-center">
+              <div className="flex border-2 p-[20px] rounded-3xl flex-col items-center justify-center gap-4 shadow-lg">
+                <img
+                  className="w-[150px] rounded-[100%] object-cover object-center border-2 border-black h-[150px]"
+                  src={myProfile?.image}
+                  alt=""
+                />
+                <div className="text-left">
+                  <h1 className="mb-5 text-xl font-semibold text-center md:text-2xl">
+                    Name: {myProfile?.name}
+                  </h1>
+                  <div className="text-[#222] text-[14px] md:text-xl mb-2 flex items-center gap-2">
+                    <MdEmail className="text-[#4475F2]" />{" "}
+                    <p className="">{myProfile?.email}</p>
+                  </div>
+                  <div className="text-[#222] mb-2 text-[14px] md:text-xl flex flex-wrap items-center gap-2">
+                    <FaPhone className="text-[#4475F2]" />{" "}
+                    <p>{myProfile?.contactDetails?.phone}</p>
+                  </div>
+                  <div className="text-[#222] mb-2 text-[14px] md:text-xl flex flex-wrap items-center gap-2">
+                    <FaLocationDot className="text-[#4475F2]" />{" "}
+                    <p>{myProfile?.contactDetails?.address}</p>
+                  </div>
+                  <div className="text-[#222] mb-2 text-[14px] md:text-xl flex flex-wrap items-center gap-2">
+                    <FaGraduationCap className="text-[#4475F2]" />{" "}
+                    <p>{myProfile?.education}</p>
+                  </div>
+                  <div className="text-[#222] mb-2 text-[14px] md:text-xl flex flex-wrap items-center gap-2">
+                    <GiSkills className="text-[#4475F2]" />{" "}
+                    <p>{myProfile?.skills}</p>
+                  </div>
+                  <div className="text-[#222] mb-2 text-[14px] md:text-xl flex flex-wrap items-center gap-2">
+                    <MdOutlineWorkHistory className="text-[#4475F2]" />{" "}
+                    <p>{myProfile?.workExperience}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           {!isLoading && myProfile?.role === "Tourist" && (
             <div>
               <h1 className="text-3xl mt-[100px] font-semibold text-center font-volkhov">
