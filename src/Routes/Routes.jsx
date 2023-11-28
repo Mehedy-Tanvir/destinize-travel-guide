@@ -17,6 +17,7 @@ import TourGuideDetails from "../Pages/TourGuideDetails/TourGuideDetails";
 import PackageDetails from "../Pages/PackageDetails.jsx/PackageDetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AllPackages from "../Pages/AllPackages/AllPackages";
+import CategoryPackages from "../Pages/CategoryPackages/CategoryPackages";
 
 const Routes = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const Routes = createBrowserRouter([
       {
         path: "allPackages",
         element: <AllPackages></AllPackages>,
+      },
+      {
+        path: "allPackages/:category",
+        element: <CategoryPackages></CategoryPackages>,
       },
       {
         path: "packageDetails/:id",

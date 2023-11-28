@@ -1,5 +1,6 @@
 import Flicking from "@egjs/react-flicking";
 import "@egjs/react-flicking/dist/flicking.css";
+import { Link } from "react-router-dom";
 
 const TourType = () => {
   const tourTypes = [
@@ -58,17 +59,16 @@ const TourType = () => {
           }}
         >
           {tourTypes.map((tourType, idx) => (
-            <div
-              key={idx}
-              className="panel mr-5 h-[300px] border-2 border-blue-500 flex flex-col justify-center items-center gap-10 w-[300px] rounded-xl shadow-lg"
-            >
-              <img
-                className="w-[100px] h-[100px] rounded-[50%]"
-                src={tourType.logo}
-                alt=""
-              />
-              <h1 className="text-2xl font-medium">{tourType.name}</h1>
-            </div>
+            <Link to={`/allPackages/${tourType.name}`} key={idx}>
+              <div className="panel mr-5 h-[300px] border-2 border-blue-500 flex flex-col justify-center items-center gap-10 w-[300px] rounded-xl shadow-lg">
+                <img
+                  className="w-[100px] h-[100px] rounded-[50%]"
+                  src={tourType.logo}
+                  alt=""
+                />
+                <h1 className="text-2xl font-medium">{tourType.name}</h1>
+              </div>
+            </Link>
           ))}
         </Flicking>
       </div>

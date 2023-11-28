@@ -20,7 +20,7 @@ const AllPackages = () => {
       </h1>
       {!isLoading && tourPackages.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {tourPackages?.slice(0, 3).map((tourPackage, idx) => (
+          {tourPackages?.map((tourPackage, idx) => (
             <PackageCard key={idx} tourPackage={tourPackage}></PackageCard>
           ))}
         </div>
