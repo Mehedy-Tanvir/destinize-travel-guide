@@ -12,11 +12,7 @@ const PackageCard = ({ tourPackage }) => {
   const { getMyProfile } = useUtils();
   const axiosSecure = useAxiosSecure();
   // Queries
-  const {
-    data: myProfile,
-    refetch,
-    isLoading,
-  } = useQuery({
+  const { data: myProfile } = useQuery({
     queryKey: ["myProfile", user?.email],
     queryFn: getMyProfile,
   });
