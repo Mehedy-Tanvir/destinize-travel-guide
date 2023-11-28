@@ -15,11 +15,13 @@ import AdminRoutes from "./AdminRoutes";
 import TourGuideRoutes from "./TourGuideRoutes";
 import TourGuideDetails from "../Pages/TourGuideDetails/TourGuideDetails";
 import PackageDetails from "../Pages/PackageDetails.jsx/PackageDetails";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -39,12 +41,17 @@ const Routes = createBrowserRouter([
       },
       {
         path: "packageDetails/:id",
-        element: <PackageDetails></PackageDetails>,
+        element: (
+          <PrivateRoutes>
+            <PackageDetails></PackageDetails>
+          </PrivateRoutes>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
+    errorElement: <ErrorPage></ErrorPage>,
     element: (
       <PrivateRoutes>
         <Dashboard></Dashboard>

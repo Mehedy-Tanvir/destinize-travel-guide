@@ -50,7 +50,7 @@ const MyBookings = () => {
           <tbody>
             {/* row 1 */}
             {!isLoading &&
-              myBookings.length > 0 &&
+              myBookings &&
               myBookings.map((myBooking, idx) => (
                 <tr key={idx}>
                   <th>{idx + 1}</th>
