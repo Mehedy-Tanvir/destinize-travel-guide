@@ -48,7 +48,11 @@ const BookingForm = ({ tourPackage }) => {
       .then((res) => {
         console.log(res.data);
         toast.success("Your booking was successful");
-        navigate("/");
+        if (res.data?.discount?.discount) {
+          navigate("/congratulations");
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);

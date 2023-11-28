@@ -111,7 +111,14 @@ const MyBookings = () => {
                     </button>
                   </td>
                   <td>
-                    <button className="p-3 mr-2 text-white bg-orange-500 border-2 rounded-lg hover:bg-orange-400 hover:text-white">
+                    <button
+                      disabled={!myProfile?.discount}
+                      className={`p-3 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-400 ${
+                        !myProfile?.discount
+                          ? "cursor-not-allowed opacity-50"
+                          : "border-red-500"
+                      }`}
+                    >
                       Discount
                     </button>
                   </td>

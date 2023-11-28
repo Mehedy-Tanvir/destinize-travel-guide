@@ -15,6 +15,7 @@ const SocialLogin = () => {
           email: result?.user?.email,
           image: result?.user?.photoURL,
           role: "Tourist",
+          discount: false,
         };
         axiosPublic
           .post("/users", userInfo)

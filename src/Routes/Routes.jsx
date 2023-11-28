@@ -20,6 +20,7 @@ import AllPackages from "../Pages/AllPackages/AllPackages";
 import CategoryPackages from "../Pages/CategoryPackages/CategoryPackages";
 import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import AllStories from "../Pages/AllStories/AllStories";
+import Congratulations from "../Pages/Congratulations/Congratulations";
 
 const Routes = createBrowserRouter([
   {
@@ -64,6 +65,14 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <PackageDetails></PackageDetails>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "congratulations",
+        element: (
+          <PrivateRoutes>
+            <Congratulations></Congratulations>
           </PrivateRoutes>
         ),
       },
