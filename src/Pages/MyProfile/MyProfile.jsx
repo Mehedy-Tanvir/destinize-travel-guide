@@ -80,7 +80,7 @@ const MyProfile = () => {
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             My <span className="text-[#4475F2]">Profile</span>
           </h1>
-          {!isLoading && myProfile?.role === "Tourist" && (
+          {!isLoading && myProfile?.role !== "Tour Guide" && (
             <div className="flex items-center justify-center">
               <div className="flex border-2 p-[20px] rounded-3xl flex-col items-center justify-center gap-4 shadow-lg">
                 <img

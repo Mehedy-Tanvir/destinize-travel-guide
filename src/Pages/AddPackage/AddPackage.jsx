@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-
 const AddPackage = () => {
   const axiosSecure = useAxiosSecure();
   const [tourData, setTourData] = useState({
@@ -85,14 +84,26 @@ const AddPackage = () => {
         </div>
         <div className="flex flex-col gap-2 mt-4">
           <h2 className="text-xl font-medium">Tour Type</h2>
-          <input
-            type="text"
+          <select
             name="tourType"
             value={tourData.tourType}
             onChange={handleChange}
             className="w-full max-w-xs input input-bordered"
-            placeholder="Enter Tour Type"
-          />
+          >
+            <option value="" disabled>
+              Select Tour Type
+            </option>
+            <option value="Cultural">Cultural</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Wildlife">Wildlife</option>
+            <option value="Historical">Historical</option>
+            <option value="Beach">Beach</option>
+            <option value="City">City</option>
+            <option value="Cruise">Cruise</option>
+            <option value="Festival">Festival</option>
+            <option value="Food">Food</option>
+            <option value="Photography">Photography</option>
+          </select>
         </div>
         <div className="flex flex-col gap-2 mt-4">
           <h2 className="text-xl font-medium">Price</h2>
@@ -102,7 +113,7 @@ const AddPackage = () => {
             value={tourData.price}
             onChange={handleChange}
             className="w-full max-w-xs input input-bordered"
-            placeholder="Enter Price"
+            placeholder="Enter Price $"
           />
         </div>
         <div className="flex flex-col gap-2 mt-4">

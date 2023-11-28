@@ -14,6 +14,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import TourGuideRoutes from "./TourGuideRoutes";
 import TourGuideDetails from "../Pages/TourGuideDetails/TourGuideDetails";
+import PackageDetails from "../Pages/PackageDetails.jsx/PackageDetails";
 
 const Routes = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const Routes = createBrowserRouter([
       {
         path: "tourGuide/:id",
         element: <TourGuideDetails></TourGuideDetails>,
+      },
+      {
+        path: "packageDetails/:id",
+        element: <PackageDetails></PackageDetails>,
       },
     ],
   },
