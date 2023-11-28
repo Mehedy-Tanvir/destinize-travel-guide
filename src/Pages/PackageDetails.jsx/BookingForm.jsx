@@ -1,40 +1,101 @@
+import { useQuery } from "@tanstack/react-query";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useUtils from "../../Utils/useUtils";
+import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const BookingForm = () => {
-  const guides = ["Guide 1", "Guide 2", "Guide 3"]; // Replace with actual guide names
+const BookingForm = ({ tourPackage }) => {
+  const { getMyProfile, getTourGuides } = useUtils();
+  const { user } = useAuth();
+  const [date, setDate] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+
+  // Queries
+  const { data: tourGuides, isLoading } = useQuery({
+    queryKey: ["tourGuides"],
+    queryFn: getTourGuides,
+  });
+
+  // Queries
+  const { data: myProfile } = useQuery({
+    queryKey: ["myProfile", user?.email],
+    queryFn: getMyProfile,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const touristId = myProfile?._id;
+    const tourGuideId = form.tourGuideId.value;
+    const tourPackageId = tourPackage._id;
+    const tourDate = date;
+
+    const bookingInfo = {
+      tourist: touristId,
+      tourGuide: tourGuideId,
+      tourPackage: tourPackageId,
+      tourDate,
+    };
+    axiosSecure
+      .post("/bookings", bookingInfo)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Your booking was successful");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Your booking was not placed");
+      });
+  };
 
   return (
     <div className="container p-4 mx-auto mt-8">
       <h2 className="mb-4 text-2xl font-bold">Booking Form</h2>
-      <form>
-        {/* Name of the Package */}
+      <div className="flex items-center justify-center mb-10">
+        <div className="flex border-2 p-[20px] rounded-3xl flex-col items-center justify-center gap-4 shadow-lg">
+          <img
+            className="w-[150px] rounded-[100%] object-cover object-center border-2 border-black h-[150px]"
+            src={myProfile?.image}
+            alt=""
+          />
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold">Name: {myProfile?.name}</h1>
+            <h1 className="text-[#666]">Email: {myProfile?.email}</h1>
+          </div>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Name of the Package
           </label>
           <input
             type="text"
+            readOnly
             name="packageName"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-            placeholder="Enter package name"
+            value={tourPackage?.tripTitle}
           />
         </div>
-
-        {/* Tourist Name */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Tourist Name
           </label>
           <input
             type="text"
+            readOnly
             name="touristName"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-            placeholder="Enter tourist name"
+            value={myProfile?.name}
           />
         </div>
-
-        {/* Tourist Email */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Tourist Email
@@ -43,66 +104,70 @@ const BookingForm = () => {
             type="email"
             name="touristEmail"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-            placeholder="Enter tourist email"
+            readOnly
+            value={myProfile?.email}
           />
         </div>
 
-        {/* Tourist Image */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Tourist Image
           </label>
           <input
-            type="file"
+            type="text"
             name="touristImage"
-            accept="image/*"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
+            readOnly
+            value={myProfile?.image}
           />
         </div>
 
-        {/* Price */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
-            Price
+            Price $
           </label>
           <input
             type="number"
             name="price"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-            placeholder="Enter price"
+            readOnly
+            value={tourPackage?.price}
           />
         </div>
-
-        {/* Tour Date */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Tour Date
           </label>
-          <DatePicker
-            selected={null} // Pass the selected date from state
-            onChange={(date) => console.log(date)} // Handle date change
-            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-          />
+          <div className="relative">
+            <DatePicker
+              selected={date}
+              onChange={(e) => setDate(e)}
+              className="w-full p-2 mt-1 border border-gray-300 rounded-md"
+            />
+            <input
+              type="hidden"
+              name="tourDate"
+              placeholder="Select a date"
+              value={date ? date.toISOString() : ""}
+            />
+          </div>
         </div>
-
-        {/* Tour Guide Name */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Tour Guide Name
           </label>
           <select
-            name="tourGuide"
+            name="tourGuideId"
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
           >
-            {guides.map((guide, index) => (
-              <option key={index} value={guide}>
-                {guide}
-              </option>
-            ))}
+            {!isLoading &&
+              tourGuides?.map((guide, index) => (
+                <option key={index} value={guide?._id}>
+                  {guide?.name}
+                </option>
+              ))}
           </select>
         </div>
-
-        {/* Book Now Button */}
         <div>
           <button
             type="submit"
@@ -115,5 +180,7 @@ const BookingForm = () => {
     </div>
   );
 };
-
+BookingForm.propTypes = {
+  tourPackage: PropTypes.object,
+};
 export default BookingForm;

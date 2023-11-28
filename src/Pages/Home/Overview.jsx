@@ -13,7 +13,6 @@ const Overview = () => {
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullscreen
           ></iframe>
           <h2 className="mt-4 text-xl font-semibold">Destination Showcase</h2>
           <p className="text-gray-600">Explore the beauty of Destination.</p>
@@ -26,7 +25,6 @@ const Overview = () => {
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullscreen
           ></iframe>
           <h2 className="mt-4 text-xl font-semibold">Adventure Highlights</h2>
           <p className="text-gray-600">
@@ -40,7 +38,6 @@ const Overview = () => {
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullscreen
           ></iframe>
           <h2 className="mt-4 text-xl font-semibold">Customer Testimonials</h2>
           <p className="text-gray-600">

@@ -4,11 +4,12 @@ import TourGuides from "../Home/TourGuides";
 import BookingForm from "./BookingForm";
 import { useParams } from "react-router-dom";
 import Spinner from "../Shared/Spinner/Spinner";
+import useAuth from "../../Hooks/useAuth";
 
 const PackageDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
-  console.log(id);
+  const { user, loading } = useAuth();
 
   // Queries
   const { data: tourPackage, isLoading } = useQuery({
@@ -19,7 +20,6 @@ const PackageDetails = () => {
       return result.data;
     },
   });
-  console.log(tourPackage);
   return (
     <div className="container p-4 mx-auto mt-8">
       <div>
@@ -72,7 +72,9 @@ const PackageDetails = () => {
         )}
       </div>
       <TourGuides></TourGuides>
-      <BookingForm></BookingForm>
+      {!loading && user && (
+        <BookingForm tourPackage={tourPackage}></BookingForm>
+      )}
     </div>
   );
 };

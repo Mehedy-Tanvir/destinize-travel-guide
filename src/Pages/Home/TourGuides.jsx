@@ -6,7 +6,7 @@ const TourGuides = () => {
   const { getTourGuides } = useUtils();
   // Queries
   const { data: tourGuides, isLoading } = useQuery({
-    queryKey: ["allUsers"],
+    queryKey: ["tourGuides"],
     queryFn: getTourGuides,
   });
   return (
