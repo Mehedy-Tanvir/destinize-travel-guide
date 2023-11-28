@@ -16,8 +16,8 @@ const TourPackages = () => {
   });
 
   return (
-    <div className="mt-10">
-      <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
+    <div className="mt-[80px]">
+      <h1 className="text-4xl mb-[100px] font-semibold text-center font-volkhov">
         Our <span className="text-[#4475F2]">Packages</span>
       </h1>
       {!isLoading && tourPackages.length > 0 && (

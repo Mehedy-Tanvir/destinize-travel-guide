@@ -6,6 +6,7 @@ import useUtils from "../../Utils/useUtils";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const PackageCard = ({ tourPackage }) => {
   const { user, loading } = useAuth();
@@ -33,7 +34,15 @@ const PackageCard = ({ tourPackage }) => {
       });
   };
   return (
-    <div className="flex w-[300px] justify-self-center self-center h-[430px] border-2 p-[20px] rounded-3xl flex-col items-center gap-4 shadow-lg">
+    <motion.div
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: "1",
+        delay: "0.5",
+      }}
+      className="flex w-[300px] justify-self-center self-center h-[430px] border-2 p-[20px] rounded-3xl flex-col items-center gap-4 shadow-lg"
+    >
       <div className="relative">
         <img
           className="w-[250px] rounded-[10%] object-cover object-center border-2 border-black h-[200px]"
@@ -66,7 +75,7 @@ const PackageCard = ({ tourPackage }) => {
           </button>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 PackageCard.propTypes = {
