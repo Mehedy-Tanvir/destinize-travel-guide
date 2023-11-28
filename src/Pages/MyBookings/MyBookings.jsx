@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const MyBookings = () => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const { getMyProfile } = useUtils();
   const axiosSecure = useAxiosSecure();
   // Queries
@@ -26,6 +26,7 @@ const MyBookings = () => {
       return result.data;
     },
   });
+  console.log(myBookings);
   const handleDelete = (id) => {
     axiosSecure
       .delete(`/bookings/${id}`)
@@ -84,14 +85,27 @@ const MyBookings = () => {
                   <td>{myBooking?.tourPackage?.price}</td>
                   <td>{myBooking?.status}</td>
                   <td>
-                    <button className="p-3 mr-2 text-white bg-green-500 border-2 rounded-lg hover:bg-green-400 hover:text-white">
+                    <button
+                      onClick={() => handleDelete(myBooking?._id)}
+                      disabled={myBooking?.status !== "In Review"}
+                      className={`p-3 mr-2 bg-green-500 text-white rounded-lg hover:bg-green-400 ${
+                        myBooking?.status !== "Accepted"
+                          ? "cursor-not-allowed opacity-50"
+                          : "border-green-500"
+                      }`}
+                    >
                       Pay
                     </button>
                   </td>
                   <td>
                     <button
                       onClick={() => handleDelete(myBooking?._id)}
-                      className="p-3 mr-2 text-white bg-red-500 border-2 rounded-lg hover:bg-red-400 hover:text-white"
+                      disabled={myBooking?.status !== "In Review"}
+                      className={`p-3 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-400 ${
+                        myBooking?.status !== "In Review"
+                          ? "cursor-not-allowed opacity-50"
+                          : "border-red-500"
+                      }`}
                     >
                       Cancel
                     </button>
