@@ -42,7 +42,7 @@ const Banner = () => {
               guidance to make your dream destination a remarkable travel
               experience.
             </motion.p>
-            <Link to="/services">
+            <Link to="/allPackages">
               <motion.button
                 initial={{ x: -1000 }}
                 animate={{ x: 0 }}

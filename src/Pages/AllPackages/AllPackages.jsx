@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import PackageCard from "./PackageCard";
-import { Link } from "react-router-dom";
+import PackageCard from "../Home/PackageCard";
 
-const TourPackages = () => {
+const AllPackages = () => {
   const axiosPublic = useAxiosPublic();
 
   // Queries
@@ -14,9 +13,8 @@ const TourPackages = () => {
       return result.data;
     },
   });
-
   return (
-    <div className="mt-10">
+    <div>
       <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
         Our <span className="text-[#4475F2]">Packages</span>
       </h1>
@@ -27,15 +25,8 @@ const TourPackages = () => {
           ))}
         </div>
       )}
-      <div className="flex items-center justify-center mt-10">
-        <Link to="/allPackages">
-          <button className="btn border-2 border-[#4475F2] text-[18px] font-medium bg-transparent text-[#4475F2] hover:text-white hover:bg-[#4475F2] shadow-lg">
-            Show All
-          </button>
-        </Link>
-      </div>
     </div>
   );
 };
 
-export default TourPackages;
+export default AllPackages;

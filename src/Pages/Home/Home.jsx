@@ -4,6 +4,8 @@ import TourType from "./TourType";
 import Overview from "./Overview";
 import TourGuides from "./TourGuides";
 import TourPackages from "./TourPackages";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 const Home = () => {
   return (
@@ -12,9 +14,31 @@ const Home = () => {
         <title>Destinize | Home</title>
       </Helmet>
       <Banner></Banner>
-      <TourPackages></TourPackages>
-      <TourGuides></TourGuides>
-      <Overview></Overview>
+      <div>
+        <Tabs>
+          <TabList>
+            <Tab>
+              <p className="text-xl">Overview</p>
+            </Tab>
+            <Tab>
+              <p className="text-xl">Our Packages</p>
+            </Tab>
+            <Tab>
+              <p className="text-xl">Meet Our Tour Guides</p>
+            </Tab>
+          </TabList>
+
+          <TabPanel>
+            <Overview></Overview>
+          </TabPanel>
+          <TabPanel>
+            <TourPackages></TourPackages>
+          </TabPanel>
+          <TabPanel>
+            <TourGuides></TourGuides>
+          </TabPanel>
+        </Tabs>
+      </div>
       <TourType></TourType>
     </>
   );
