@@ -41,6 +41,7 @@ const BookingForm = ({ tourPackage }) => {
       tourGuide: tourGuideId,
       tourPackage: tourPackageId,
       tourDate,
+      status: "In Review",
     };
     axiosSecure
       .post("/bookings", bookingInfo)

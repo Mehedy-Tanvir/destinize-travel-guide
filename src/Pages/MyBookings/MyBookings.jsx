@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useUtils from "../../Utils/useUtils";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const MyBookings = () => {
   const { user, loading } = useAuth();
@@ -25,7 +26,19 @@ const MyBookings = () => {
       return result.data;
     },
   });
-  console.log(myBookings);
+  const handleDelete = (id) => {
+    axiosSecure
+      .delete(`/bookings/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Booking was canceled");
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Booking was not canceled");
+      });
+  };
   return (
     <div className="">
       <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
@@ -69,14 +82,17 @@ const MyBookings = () => {
                       : ""}
                   </td>
                   <td>{myBooking?.tourPackage?.price}</td>
-                  <td>In Review</td>
+                  <td>{myBooking?.status}</td>
                   <td>
                     <button className="p-3 mr-2 text-white bg-green-500 border-2 rounded-lg hover:bg-green-400 hover:text-white">
                       Pay
                     </button>
                   </td>
                   <td>
-                    <button className="p-3 mr-2 text-white bg-red-500 border-2 rounded-lg hover:bg-red-400 hover:text-white">
+                    <button
+                      onClick={() => handleDelete(myBooking?._id)}
+                      className="p-3 mr-2 text-white bg-red-500 border-2 rounded-lg hover:bg-red-400 hover:text-white"
+                    >
                       Cancel
                     </button>
                   </td>
