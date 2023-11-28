@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Shared/Spinner/Spinner";
 import { FacebookShareButton } from "react-share";
 import { FaFacebookSquare } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
 
 const StoryDetails = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
+  const { user, loading } = useAuth();
 
   // Queries
   const { data: story, isLoading } = useQuery({
@@ -40,19 +42,21 @@ const StoryDetails = () => {
           }`}</p>
           <p className="mb-2 text-gray-700">{`Location: ${story?.location}`}</p>
           <p className="mb-4 text-gray-800">{story?.content}</p>
-          <div>
-            <FacebookShareButton
-              url={`https://www.your-story-website.com/stories/${id}`}
-              quote={story.title}
-              hashtag="SundarbansAdventure"
-              className="mt-4"
-            >
-              <div className="flex items-center justify-center gap-4">
-                <p className="text-2xl font-medium">Share on</p>{" "}
-                <FaFacebookSquare className="text-3xl text-blue-500" />
-              </div>
-            </FacebookShareButton>
-          </div>
+          {!loading && user && (
+            <div>
+              <FacebookShareButton
+                url={`https://www.your-story-website.com/stories/${id}`}
+                quote={story.title}
+                hashtag="SundarbansAdventure"
+                className="mt-4"
+              >
+                <div className="flex items-center justify-center gap-4">
+                  <p className="text-2xl font-medium">Share on</p>{" "}
+                  <FaFacebookSquare className="text-3xl text-blue-500" />
+                </div>
+              </FacebookShareButton>
+            </div>
+          )}
         </div>
       )}
       {isLoading && <Spinner></Spinner>}
