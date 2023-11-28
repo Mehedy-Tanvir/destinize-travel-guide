@@ -9,17 +9,24 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { MdOutlineWorkHistory } from "react-icons/md";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 
 const MyProfile = () => {
   const { user } = useAuth();
   const { getMyProfile } = useUtils();
   const axiosSecure = useAxiosSecure();
-  const handleSubmit = (e) => {
+  const [date, setDate] = useState(null);
+  const handleAddStory = (e) => {
     e.preventDefault();
     const form = e.target;
-    const storyImage = form.storyImage.value;
-    const storyDetails = form.storyDetails.value;
-    const story = { storyDetails, storyImage };
+    const title = form.title.value;
+    const author = myProfile.name;
+    const location = form.location.value;
+    const content = form.content.value;
+    const image = form.image.value;
+    const story = { title, author, location, content, image, date };
     axiosSecure
       .post("/stories", story)
       .then((res) => {
@@ -29,6 +36,7 @@ const MyProfile = () => {
         form.storyDetails.value = "";
       })
       .catch((error) => console.log(error));
+    console.log(story);
   };
 
   const handleUpdateProfile = (e) => {
@@ -142,23 +150,71 @@ const MyProfile = () => {
               <h1 className="text-3xl mt-[100px] font-semibold text-center font-volkhov">
                 Add Your <span className="text-[#4475F2]">Story</span>
               </h1>
-              <form onSubmit={handleSubmit} className="w-full card-body">
+              <form onSubmit={handleAddStory} className="w-full card-body">
                 <div className="flex flex-col gap-2">
                   <div className="form-control">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Title
+                    </label>
                     <input
-                      name="storyImage"
+                      name="title"
+                      type="text"
+                      placeholder="Title"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Image
+                    </label>
+                    <input
+                      name="image"
                       type="text"
                       placeholder="Image URL"
                       className="input input-bordered"
                       required
                     />
                   </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Tour Date
+                    </label>
+                    <div className="relative">
+                      <DatePicker
+                        selected={date}
+                        onChange={(e) => setDate(e)}
+                        className="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                      />
+                      <input
+                        type="hidden"
+                        name="date"
+                        placeholder="Select a date"
+                        value={date ? date.toISOString() : ""}
+                      />
+                    </div>
+                  </div>
                   <div className="form-control">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Location
+                    </label>
+                    <input
+                      name="location"
+                      type="text"
+                      placeholder="Location"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Content
+                    </label>
                     <textarea
                       className="w-full max-w-xs textarea textarea-bordered textarea-lg"
-                      placeholder="Your Story"
+                      placeholder="Story Content"
                       required
-                      name="storyDetails"
+                      name="content"
                     ></textarea>
                   </div>
                 </div>

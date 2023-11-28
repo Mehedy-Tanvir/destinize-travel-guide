@@ -18,6 +18,8 @@ import PackageDetails from "../Pages/PackageDetails.jsx/PackageDetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AllPackages from "../Pages/AllPackages/AllPackages";
 import CategoryPackages from "../Pages/CategoryPackages/CategoryPackages";
+import StoryDetails from "../Pages/StoryDetails/StoryDetails";
+import AllStories from "../Pages/AllStories/AllStories";
 
 const Routes = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const Routes = createBrowserRouter([
       {
         path: "allPackages/:category",
         element: <CategoryPackages></CategoryPackages>,
+      },
+      {
+        path: "allStories",
+        element: <AllStories></AllStories>,
+      },
+      {
+        path: "storyDetails/:id",
+        element: <StoryDetails></StoryDetails>,
       },
       {
         path: "packageDetails/:id",

@@ -6,6 +6,7 @@ import TourGuides from "./TourGuides";
 import TourPackages from "./TourPackages";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import StorySection from "./StorySection";
 
 const Home = () => {
   return (
@@ -40,6 +41,7 @@ const Home = () => {
         </Tabs>
       </div>
       <TourType></TourType>
+      <StorySection></StorySection>
     </>
   );
 };

@@ -48,7 +48,6 @@ const TourGuideDetails = () => {
       return result.data;
     },
   });
-  console.log("reviews", reviews);
   const { data: myProfile } = useQuery({
     queryKey: ["myProfileForReview", user?.email],
     queryFn: getMyProfile,

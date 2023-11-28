@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useUtils from "../../Utils/useUtils";
 import TourGuideCard from "./TourGuideCard";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const TourGuides = () => {
   const { getTourGuides } = useUtils();
@@ -11,6 +12,7 @@ const TourGuides = () => {
   });
   return (
     <div className="mt-[80px]">
+      {isLoading && <Spinner></Spinner>}
       {!isLoading && tourGuides && (
         <div className="mb-10">
           <h1 className="text-4xl mb-[100px] font-semibold text-center font-volkhov">
