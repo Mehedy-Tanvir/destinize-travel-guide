@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Shared/Spinner/Spinner";
+import { FacebookShareButton } from "react-share";
+import { FaFacebookSquare } from "react-icons/fa";
 
 const StoryDetails = () => {
   const { id } = useParams();
@@ -39,10 +41,17 @@ const StoryDetails = () => {
           <p className="mb-2 text-gray-700">{`Location: ${story?.location}`}</p>
           <p className="mb-4 text-gray-800">{story?.content}</p>
           <div>
-            {/* Add your share button here */}
-            {/* You can use the react-share package for this */}
-            {/* Example: */}
-            {/* <FacebookShareButton url={`URL_OF_YOUR_STORY_DETAIL_PAGE/${id}`}>Share on Facebook</FacebookShareButton> */}
+            <FacebookShareButton
+              url={`https://www.your-story-website.com/stories/${id}`}
+              quote={story.title}
+              hashtag="SundarbansAdventure"
+              className="mt-4"
+            >
+              <div className="flex items-center justify-center gap-4">
+                <p className="text-2xl font-medium">Share on</p>{" "}
+                <FaFacebookSquare className="text-3xl text-blue-500" />
+              </div>
+            </FacebookShareButton>
           </div>
         </div>
       )}
