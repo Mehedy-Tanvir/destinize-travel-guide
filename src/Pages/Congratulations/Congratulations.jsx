@@ -17,6 +17,10 @@ const Congratulations = () => {
             Apply
           </Link>
         </p>
+        <p className="text-lg font-medium">
+          NB: This Discount Will Be Applicable To Your Accepted Bookings Only
+          Once.
+        </p>
       </div>
     </div>
   );

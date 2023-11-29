@@ -78,7 +78,7 @@ const MyAssignedTours = () => {
                         })
                       : ""}
                   </td>
-                  <td>{item?.tourPackage?.price}</td>
+                  <td>${item?.tourPackage?.price}</td>
                   <td>{item?.status}</td>
                   <td>
                     <button

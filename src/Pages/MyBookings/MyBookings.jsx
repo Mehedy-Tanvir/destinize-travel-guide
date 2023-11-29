@@ -40,6 +40,23 @@ const MyBookings = () => {
         toast.error("Booking was not canceled");
       });
   };
+  const handleDiscount = (id, price) => {
+    const updatedPrice = price - price * 0.3;
+    axiosSecure
+      .patch(`/bookingDiscount/${id}`, {
+        price: updatedPrice,
+        tourist: myProfile._id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        refetch();
+        toast.success("Discount was applied");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Discount was not applied");
+      });
+  };
   return (
     <div className="">
       <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
@@ -82,7 +99,12 @@ const MyBookings = () => {
                         )
                       : ""}
                   </td>
-                  <td>{myBooking?.tourPackage?.price}</td>
+                  <td>
+                    $
+                    {myBooking?.discountedPrice
+                      ? myBooking?.discountedPrice
+                      : myBooking?.tourPackage?.price}
+                  </td>
                   <td>{myBooking?.status}</td>
                   <td>
                     <button
@@ -112,11 +134,19 @@ const MyBookings = () => {
                   </td>
                   <td>
                     <button
-                      disabled={!myProfile?.discount}
-                      className={`p-3 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-400 ${
-                        !myProfile?.discount
+                      onClick={() =>
+                        handleDiscount(
+                          myBooking?._id,
+                          myBooking?.tourPackage?.price
+                        )
+                      }
+                      disabled={
+                        !myProfile?.discount || myBooking?.status !== "Accepted"
+                      }
+                      className={`p-3 mr-2 bg-blue-500 text-white rounded-lg hover:bg-blue-400 ${
+                        !myProfile?.discount || myBooking?.status !== "Accepted"
                           ? "cursor-not-allowed opacity-50"
-                          : "border-red-500"
+                          : "border-blue-500"
                       }`}
                     >
                       Discount
