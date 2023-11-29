@@ -73,8 +73,8 @@ const CheckoutForm = ({ price, booking }) => {
         // change the status of the booking
         axiosSecure
           .patch(`/bookingConfirm/${booking._id}`, { status: "Paid" })
-          .then((res) => {
-            console.log(res.data);
+          .then((response) => {
+            console.log(response.data);
             toast.success("Your payment was successful");
             navigate("/");
           })

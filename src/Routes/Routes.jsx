@@ -22,6 +22,9 @@ import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import AllStories from "../Pages/AllStories/AllStories";
 import Congratulations from "../Pages/Congratulations/Congratulations";
 import Payment from "../Pages/Payment/Payment";
+import Community from "../Pages/Community/Community";
+import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 const Routes = createBrowserRouter([
   {
@@ -76,6 +79,18 @@ const Routes = createBrowserRouter([
             <Congratulations></Congratulations>
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "community",
+        element: <Community></Community>,
+      },
+      {
+        path: "about",
+        element: <About></About>,
+      },
+      {
+        path: "contact",
+        element: <Contact></Contact>,
       },
     ],
   },

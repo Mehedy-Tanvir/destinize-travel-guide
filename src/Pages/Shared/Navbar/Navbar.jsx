@@ -111,7 +111,7 @@ const Navbar = () => {
               ? "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
               : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
           }
-          to="/blogs"
+          to="/allStories"
         >
           Blogs
         </NavLink>
@@ -283,7 +283,7 @@ const Navbar = () => {
               ? "lg:text-[#4475F2] border-2 border-[#4475F2] drop-shadow-lg normal-case font-poppins font-normal text-[16px] hover:shadow-sm hover:bg-white"
               : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
           }
-          to="/blogs"
+          to="/allStories"
         >
           Blogs
         </NavLink>
