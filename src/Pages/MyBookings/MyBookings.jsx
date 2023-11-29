@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import useUtils from "../../Utils/useUtils";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const MyBookings = () => {
   const { user } = useAuth();
@@ -107,17 +108,18 @@ const MyBookings = () => {
                   </td>
                   <td>{myBooking?.status}</td>
                   <td>
-                    <button
-                      onClick={() => handleDelete(myBooking?._id)}
-                      disabled={myBooking?.status !== "In Review"}
-                      className={`p-3 mr-2 bg-green-500 text-white rounded-lg hover:bg-green-400 ${
-                        myBooking?.status !== "Accepted"
-                          ? "cursor-not-allowed opacity-50"
-                          : "border-green-500"
-                      }`}
-                    >
-                      Pay
-                    </button>
+                    <Link to={`/dashboard/payment/${myBooking?._id}`}>
+                      <button
+                        disabled={myBooking?.status !== "Accepted"}
+                        className={`p-3 mr-2 bg-green-500 text-white rounded-lg hover:bg-green-400 ${
+                          myBooking?.status !== "Accepted"
+                            ? "cursor-not-allowed opacity-50"
+                            : "border-green-500"
+                        }`}
+                      >
+                        Pay
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button

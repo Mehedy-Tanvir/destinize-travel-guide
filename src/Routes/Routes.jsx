@@ -21,6 +21,7 @@ import CategoryPackages from "../Pages/CategoryPackages/CategoryPackages";
 import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import AllStories from "../Pages/AllStories/AllStories";
 import Congratulations from "../Pages/Congratulations/Congratulations";
+import Payment from "../Pages/Payment/Payment";
 
 const Routes = createBrowserRouter([
   {
@@ -138,6 +139,14 @@ const Routes = createBrowserRouter([
             <AdminRoutes>
               <ManageUsers></ManageUsers>
             </AdminRoutes>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "payment/:id",
+        element: (
+          <PrivateRoutes>
+            <Payment></Payment>
           </PrivateRoutes>
         ),
       },
