@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import TourGuides from "../Home/TourGuides";
 import BookingForm from "./BookingForm";
 import { useParams } from "react-router-dom";
 import Spinner from "../Shared/Spinner/Spinner";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const PackageDetails = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user, loading } = useAuth();
 
@@ -16,7 +16,7 @@ const PackageDetails = () => {
     queryKey: ["tourPackage", id],
     enabled: Boolean(id),
     queryFn: async () => {
-      const result = await axiosPublic(`/tours/${id}`);
+      const result = await axiosSecure(`/tours/${id}`);
       return result.data;
     },
   });

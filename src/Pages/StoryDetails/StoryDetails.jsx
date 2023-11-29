@@ -45,7 +45,7 @@ const StoryDetails = () => {
           {!loading && user && (
             <div>
               <FacebookShareButton
-                url={`https://www.your-story-website.com/stories/${id}`}
+                url={`https://destinize-tour-guide.web.app/storyDetails/${story?._id}`}
                 quote={story.title}
                 hashtag="SundarbansAdventure"
                 className="mt-4"

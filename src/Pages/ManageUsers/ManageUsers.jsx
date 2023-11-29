@@ -31,7 +31,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <>
+    <div className="h-screen">
       {isLoading && <Spinner></Spinner>}
       {!isLoading && allUsers && (
         <div className="px-2 mt-[150px] lg:mt-0 max-w-[1400px] mx-auto overflow-x-auto">
@@ -113,7 +113,8 @@ const ManageUsers = () => {
           </div>
         </div>
       )}
-    </>
+      <div className="w-full h-10"></div>
+    </div>
   );
 };
 
