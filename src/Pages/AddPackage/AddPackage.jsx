@@ -1,8 +1,11 @@
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 const AddPackage = () => {
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const [tourData, setTourData] = useState({
     tripTitle: "",
     galleryImages: [],
@@ -60,6 +63,7 @@ const AddPackage = () => {
       .post("/tours", tourData)
       .then((res) => {
         toast.success("Package added successfully");
+        navigate("/allPackages");
         console.log(res.data);
       })
       .catch((error) => {
@@ -70,6 +74,9 @@ const AddPackage = () => {
 
   return (
     <div className="px-2 h-screen pb-[100px] max-w-[1400px] w-full mx-auto">
+      <Helmet>
+        <title>Destinize | Add Package</title>
+      </Helmet>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-medium">Trip Title</h2>
