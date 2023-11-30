@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 const About = () => {
   return (
     <section className="p-16 bg-gray-100 rounded-lg">
+      <Helmet>
+        <title>Destinize | About</title>
+      </Helmet>
       <div className="container mx-auto">
         <h1 className="text-4xl mb-[100px] font-semibold text-center font-volkhov">
           About <span className="text-[#4475F2]">Destinize</span>

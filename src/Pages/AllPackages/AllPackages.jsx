@@ -23,7 +23,7 @@ const AllPackages = () => {
         Our <span className="text-[#4475F2]">Packages</span>
       </h1>
       {!isLoading && tourPackages.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {tourPackages?.map((tourPackage, idx) => (
             <PackageCard key={idx} tourPackage={tourPackage}></PackageCard>
           ))}

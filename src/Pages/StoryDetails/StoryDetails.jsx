@@ -5,6 +5,7 @@ import Spinner from "../Shared/Spinner/Spinner";
 import { FacebookShareButton } from "react-share";
 import { FaFacebookSquare } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const StoryDetails = () => {
   const { id } = useParams();
@@ -23,6 +24,9 @@ const StoryDetails = () => {
 
   return (
     <div className="container mx-auto my-8">
+      <Helmet>
+        <title>Destinize | Story</title>
+      </Helmet>
       {!isLoading && story && (
         <div className="max-w-2xl p-8 mx-auto bg-white rounded-md shadow-md">
           <img
