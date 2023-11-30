@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
+import { Helmet } from "react-helmet-async";
 
 const ErrorPage = () => {
   return (
     <>
       <Navbar></Navbar>
       <div className="flex flex-col items-center justify-center mx-auto max-w-[1400px] pb-10 min-h-screen gap-6">
+        <Helmet>
+          <title>Destinize | Error</title>
+        </Helmet>
         <div className="flex items-center justify-center">
           <img className="max-h-[400px]" src="/404-error.gif" alt="image" />
         </div>

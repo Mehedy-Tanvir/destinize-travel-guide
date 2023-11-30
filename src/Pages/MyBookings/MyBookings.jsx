@@ -4,6 +4,7 @@ import useUtils from "../../Utils/useUtils";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyBookings = () => {
   const { user } = useAuth();
@@ -59,11 +60,14 @@ const MyBookings = () => {
       });
   };
   return (
-    <div className="">
+    <div className="h-screen">
+      <Helmet>
+        <title>Destinize | Bookings</title>
+      </Helmet>
       <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
         My <span className="text-[#4475F2]">Bookings</span>
       </h1>
-      <div className="overflow-x-auto w-[350px] md:w-full px-2">
+      <div className="overflow-x-auto w-[350px] md:w-[700px] xl:w-full px-2">
         <table className="table table-zebra">
           {/* head */}
           <thead>

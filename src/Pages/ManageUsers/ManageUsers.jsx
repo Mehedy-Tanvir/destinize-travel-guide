@@ -3,6 +3,7 @@ import useUtils from "../../Utils/useUtils";
 import Spinner from "../Shared/Spinner/Spinner";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const { getAllUsers } = useUtils();
@@ -32,13 +33,16 @@ const ManageUsers = () => {
 
   return (
     <div className="h-screen">
+      <Helmet>
+        <title>Destinize | Manage User</title>
+      </Helmet>
       {isLoading && <Spinner></Spinner>}
       {!isLoading && allUsers && (
         <div className="px-2 mt-[150px] lg:mt-0 max-w-[1400px] mx-auto overflow-x-auto">
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             Manage <span className="text-[#4475F2]">Users</span>
           </h1>
-          <div className="overflow-x-auto w-[350px] md:w-full px-2">
+          <div className="overflow-x-auto w-[350px] md:w-[700px] xl:w-full px-2">
             <table className="table table-zebra">
               {/* head */}
               <thead>

@@ -86,7 +86,7 @@ const CheckoutForm = ({ price, booking }) => {
                 toast.success("Your payment was successful");
                 Swal.fire({
                   title: "Your payment was successful!",
-                  text: `Your Transaction Id: ${paymentIntent.id}`,
+                  text: `Your Transaction Id: ${transactionId}`,
                   icon: "success",
                 });
                 navigate("/");

@@ -1,8 +1,12 @@
 import Confetti from "react-confetti";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 const Congratulations = () => {
   return (
     <div className="flex items-center justify-center w-full min-h-screen">
+      <Helmet>
+        <title>Destinize | Congratulations</title>
+      </Helmet>
       <div className="flex flex-col items-center justify-center gap-10">
         <Confetti></Confetti>
         <h1 className="text-5xl font-medium text-red-500">

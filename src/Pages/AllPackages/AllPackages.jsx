@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PackageCard from "../Home/PackageCard";
+import { Helmet } from "react-helmet-async";
 
 const AllPackages = () => {
   const axiosPublic = useAxiosPublic();
@@ -15,6 +16,9 @@ const AllPackages = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>Destinize | Packages</title>
+      </Helmet>
       <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
         Our <span className="text-[#4475F2]">Packages</span>
       </h1>

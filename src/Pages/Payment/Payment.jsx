@@ -4,6 +4,7 @@ import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
@@ -22,6 +23,9 @@ const Payment = () => {
 
   return (
     <div className="h-screen">
+      <Helmet>
+        <title>Destinize | Payment</title>
+      </Helmet>
       <div className="flex flex-col items-center justify-center gap-8">
         <h1 className="text-4xl">Payment</h1>
         <p className="text-2xl">Please Pay to Confirm Your Booking</p>

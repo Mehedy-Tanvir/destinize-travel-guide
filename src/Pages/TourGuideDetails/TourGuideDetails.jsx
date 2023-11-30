@@ -18,6 +18,7 @@ import "react-awesome-slider/dist/styles.css";
 
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { Helmet } from "react-helmet-async";
 
 const TourGuideDetails = () => {
   const { user, loading } = useAuth();
@@ -85,6 +86,9 @@ const TourGuideDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Destinize | Tour Guide</title>
+      </Helmet>
       {!isLoading && tourGuide && (
         <div className="flex flex-col items-center justify-center mb-10">
           <h1 className="text-4xl mt-[40px] mb-[40px] font-semibold text-center font-volkhov">

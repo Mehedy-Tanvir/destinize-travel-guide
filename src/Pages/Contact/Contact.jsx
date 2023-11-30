@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 const Contact = () => {
   return (
     <div className="container mx-auto my-8">
+      <Helmet>
+        <title>Destinize | Contact</title>
+      </Helmet>
       <h2 className="mb-4 text-3xl font-semibold">Contact Us</h2>
       <p className="mb-8 text-gray-600">
         We would love to hear from you! Reach out to us with any questions or

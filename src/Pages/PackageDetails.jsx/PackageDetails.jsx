@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../Shared/Spinner/Spinner";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const PackageDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,6 +23,9 @@ const PackageDetails = () => {
   });
   return (
     <div className="container p-4 mx-auto mt-8">
+      <Helmet>
+        <title>Destinize | Package Details</title>
+      </Helmet>
       <div>
         {isLoading && <Spinner></Spinner>}
         {!isLoading && !tourPackage && (

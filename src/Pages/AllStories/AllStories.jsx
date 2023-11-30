@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import StoryCard from "../Home/StoryCard";
 import Spinner from "../Shared/Spinner/Spinner";
+import { Helmet } from "react-helmet-async";
 
 const AllStories = () => {
   const axiosPublic = useAxiosPublic();
@@ -16,6 +17,9 @@ const AllStories = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Destinize | Stories</title>
+      </Helmet>
       {isLoading && <Spinner></Spinner>}
       {!isLoading && stories && (
         <div className="container mx-auto my-8">

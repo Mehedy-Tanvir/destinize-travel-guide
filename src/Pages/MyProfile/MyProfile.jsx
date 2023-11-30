@@ -12,6 +12,7 @@ import { MdOutlineWorkHistory } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -83,6 +84,9 @@ const MyProfile = () => {
 
   return (
     <div className="h-screen">
+      <Helmet>
+        <title>Destinize | Profile</title>
+      </Helmet>
       {!isLoading && myProfile && (
         <div className="px-2 mt-10">
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">

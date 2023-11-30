@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PackageCard from "../Home/PackageCard";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const CategoryPackages = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,6 +18,9 @@ const CategoryPackages = () => {
   });
   return (
     <div className="mt-10">
+      <Helmet>
+        <title>Destinize | Category</title>
+      </Helmet>
       {!isLoading && categoryPackages.length > 0 && (
         <div>
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
