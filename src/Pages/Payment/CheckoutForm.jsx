@@ -83,13 +83,13 @@ const CheckoutForm = ({ price, booking }) => {
               .patch(`/bookingConfirm/${booking._id}`, { status: "Paid" })
               .then((response) => {
                 console.log(response.data);
-                toast.success("Your payment was successful");
                 Swal.fire({
                   title: "Your payment was successful!",
-                  text: `Your Transaction Id: ${transactionId}`,
+                  text: `Your Transaction Id: ${paymentInfo.transactionId}`,
                   icon: "success",
+                }).then(() => {
+                  navigate("/");
                 });
-                navigate("/");
               })
               .catch((error) => {
                 console.log(error);

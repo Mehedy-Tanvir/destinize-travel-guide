@@ -36,6 +36,9 @@ const PackageDetails = () => {
         {!isLoading && tourPackage && (
           <div>
             <section className="mb-8">
+              <h1 className="text-4xl mb-[100px] font-semibold text-center font-volkhov">
+                {tourPackage?.tripTitle}
+              </h1>
               <h2 className="mb-4 text-2xl font-bold">Gallery</h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {tourPackage?.galleryImages?.map((galleryImage, idx) => (

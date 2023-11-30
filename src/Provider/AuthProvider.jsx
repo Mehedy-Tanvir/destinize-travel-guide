@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         setLoading(false);
         axios
-          .post("http://localhost:3000/jwt", loggedUser, {
+          .post("https://destinize-server.vercel.app/jwt", loggedUser, {
             withCredentials: true,
           })
           .then((res) => console.log(res))
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         setLoading(false);
         axios
-          .post("http://localhost:3000/logout", loggedUser, {
+          .post("https://destinize-server.vercel.app/logout", loggedUser, {
             withCredentials: true,
           })
           .then((res) => console.log(res))
