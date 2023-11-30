@@ -17,7 +17,7 @@ const CategoryPackages = () => {
     },
   });
   return (
-    <div className="mt-10">
+    <div className="mt-10 mb-10">
       <Helmet>
         <title>Destinize | Category</title>
       </Helmet>
