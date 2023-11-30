@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const CheckoutForm = ({ price, booking }) => {
   const [error, setError] = useState("");
@@ -70,13 +71,30 @@ const CheckoutForm = ({ price, booking }) => {
         console.log("transaction id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
-        // change the status of the booking
+        // save payment info and change the status of the booking
+        const paymentInfo = {
+          booking: booking._id,
+          transactionId: paymentIntent.id,
+        };
         axiosSecure
-          .patch(`/bookingConfirm/${booking._id}`, { status: "Paid" })
-          .then((response) => {
-            console.log(response.data);
-            toast.success("Your payment was successful");
-            navigate("/");
+          .post("/payment", paymentInfo)
+          .then(() => {
+            axiosSecure
+              .patch(`/bookingConfirm/${booking._id}`, { status: "Paid" })
+              .then((response) => {
+                console.log(response.data);
+                toast.success("Your payment was successful");
+                Swal.fire({
+                  title: "Your payment was successful!",
+                  text: `Your Transaction Id: ${paymentIntent.id}`,
+                  icon: "success",
+                });
+                navigate("/");
+              })
+              .catch((error) => {
+                console.log(error);
+                toast.error("Your payment was not successful");
+              });
           })
           .catch((error) => {
             console.log(error);
@@ -111,9 +129,6 @@ const CheckoutForm = ({ price, booking }) => {
         Pay
       </button>
       <p className="text-red-500">{error}</p>
-      {transactionId && (
-        <p className="text-green-500">Your transaction ID {transactionId}</p>
-      )}
     </form>
   );
 };

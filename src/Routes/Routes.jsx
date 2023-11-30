@@ -25,6 +25,7 @@ import Payment from "../Pages/Payment/Payment";
 import Community from "../Pages/Community/Community";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import Offer from "../Pages/Offer/Offer";
 
 const Routes = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const Routes = createBrowserRouter([
       {
         path: "contact",
         element: <Contact></Contact>,
+      },
+      {
+        path: "offer",
+        element: <Offer></Offer>,
       },
     ],
   },

@@ -224,7 +224,7 @@ const Navbar = () => {
                       ? "lg:text-[#4475F2] border-2 border-[#4475F2] drop-shadow-lg normal-case font-poppins font-normal text-[16px] hover:shadow-sm hover:bg-white"
                       : "text-[#222] drop-shadow-lg normal-case font-normal text-[16px]"
                   }
-                  to="/offers"
+                  to="/offer"
                 >
                   <div className="flex items-center justify-center gap-2 font-medium text-[18px]">
                     <MdOutlineLocalOffer className="text-[#4475F2]" />{" "}
