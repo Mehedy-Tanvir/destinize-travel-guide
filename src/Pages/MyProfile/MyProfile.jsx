@@ -35,8 +35,10 @@ const MyProfile = () => {
       .then((res) => {
         console.log(res.data);
         toast.success("Story added");
-        form.storyImage.value = "";
-        form.storyDetails.value = "";
+        form.title.value = "";
+        form.location.value = "";
+        form.content.value = "";
+        form.image.value = "";
         navigate("/allStories");
       })
       .catch((error) => console.log(error));
