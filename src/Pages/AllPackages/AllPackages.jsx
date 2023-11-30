@@ -15,7 +15,7 @@ const AllPackages = () => {
     },
   });
   return (
-    <div>
+    <div className="mt-10 mb-10">
       <Helmet>
         <title>Destinize | Packages</title>
       </Helmet>
