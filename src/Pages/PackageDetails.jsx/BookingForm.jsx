@@ -13,6 +13,7 @@ const BookingForm = ({ tourPackage }) => {
   const { getMyProfile, getTourGuides } = useUtils();
   const { user } = useAuth();
   const [date, setDate] = useState(null);
+  const [selectedTourGuide, setSelectedTourGuide] = useState("");
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -28,11 +29,9 @@ const BookingForm = ({ tourPackage }) => {
     queryFn: getMyProfile,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
+  const handleSubmit = () => {
     const touristId = myProfile?._id;
-    const tourGuideId = form.tourGuideId.value;
+    const tourGuideId = selectedTourGuide;
     const tourPackageId = tourPackage._id;
     const tourDate = date;
 
@@ -51,13 +50,17 @@ const BookingForm = ({ tourPackage }) => {
         if (res.data?.discount?.discount) {
           navigate("/congratulations");
         } else {
-          navigate("/");
+          navigate("/dashboard/myBookings");
         }
       })
       .catch((error) => {
         console.log(error);
         toast.error("Your booking was not placed");
       });
+    document.getElementById("my_modal_5").close();
+  };
+  const handleBookNowClick = () => {
+    document.getElementById("my_modal_5").showModal();
   };
 
   return (
@@ -76,7 +79,7 @@ const BookingForm = ({ tourPackage }) => {
           </div>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Name of the Package
@@ -163,6 +166,7 @@ const BookingForm = ({ tourPackage }) => {
           </label>
           <select
             name="tourGuideId"
+            onChange={(e) => setSelectedTourGuide(e.target.value)}
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
           >
             {!isLoading &&
@@ -175,11 +179,45 @@ const BookingForm = ({ tourPackage }) => {
         </div>
         <div>
           <button
-            type="submit"
+            type="button"
             className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            onClick={handleBookNowClick}
           >
             Book Now
           </button>
+          <dialog
+            id="my_modal_5"
+            className="modal modal-bottom sm:modal-middle"
+          >
+            <div className="modal-box">
+              <h3 className="text-lg font-bold">
+                Want to confirm your booking?
+              </h3>
+              <p className="py-4">
+                Press Confirm To Book, Press Cancel To Cancel
+              </p>
+              <div className="modal-action">
+                <div className="flex items-center justify-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("my_modal_5").close()
+                    }
+                    className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-400"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    className="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-400"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       </form>
     </div>
