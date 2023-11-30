@@ -21,7 +21,7 @@ const StorySection = () => {
           <h1 className="text-4xl mb-[100px] font-semibold text-center font-volkhov">
             Tourist <span className="text-[#4475F2]">Stories</span>
           </h1>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {stories?.slice(0, 4).map((story, idx) => (
               <StoryCard key={idx} story={story} />
             ))}

@@ -13,12 +13,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   const { user } = useAuth();
   const { getMyProfile } = useUtils();
   const axiosSecure = useAxiosSecure();
   const [date, setDate] = useState(null);
+  const navigate = useNavigate();
   const handleAddStory = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -35,6 +37,7 @@ const MyProfile = () => {
         toast.success("Story added");
         form.storyImage.value = "";
         form.storyDetails.value = "";
+        navigate("/allStories");
       })
       .catch((error) => console.log(error));
     console.log(story);
