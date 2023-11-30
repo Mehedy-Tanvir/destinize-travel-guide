@@ -42,8 +42,8 @@ const Navbar = () => {
             />
           </NavLink>
           <ul className="p-2">
-            <li>{user?.displayName}</li>
-            <li>{user?.email}</li>
+            <li className="text-[12px]">{user?.displayName}</li>
+            <li className="text-[12px]">{user?.email}</li>
             <li>
               <NavLink
                 className={({ isActive, isPending }) =>

@@ -26,7 +26,7 @@ const CategoryPackages = () => {
           <h1 className="text-4xl mb-[40px] font-semibold text-center font-volkhov">
             Category <span className="text-[#4475F2]">{category}</span>
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {categoryPackages?.map((tourPackage, idx) => (
               <PackageCard key={idx} tourPackage={tourPackage}></PackageCard>
             ))}
