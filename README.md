@@ -59,8 +59,8 @@
   - Sweet Alert 2
 
 - **Deployment:**
-
-  - Firebase Hosting
+  - Client side was hosted to Firebase
+  - Server side was hosted to Vercel
 
 ## Server Repository Link
 
