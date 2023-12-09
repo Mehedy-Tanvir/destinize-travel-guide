@@ -66,7 +66,7 @@
 
 - [https://github.com/Mehedy-Tanvir/destinize-travel-guide-server](https://github.com/Mehedy-Tanvir/destinize-travel-guide-server)
 
-  ## Live Links
+## Live Links
 
 - [https://destinize-tour-guide.web.app/](https://destinize-tour-guide.web.app/)
 - [https://destinize-tour-guide.firebaseapp.com/](https://destinize-tour-guide.firebaseapp.com/)
