@@ -1,6 +1,33 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const Contact = () => {
+  const axiosPublic = useAxiosPublic();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make a POST request to send the email
+      await axiosPublic.post("/sendEmail", formData);
+      toast.success("Email sent successfully!");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Failed to send email. Please try again.");
+    }
+  };
+
   return (
     <div className="container mx-auto my-8">
       <Helmet>
@@ -11,7 +38,7 @@ const Contact = () => {
         We would love to hear from you! Reach out to us with any questions or
         inquiries.
       </p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label
@@ -25,6 +52,7 @@ const Contact = () => {
               id="name"
               name="name"
               className="w-full p-2 mt-1 border rounded-md"
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -39,6 +67,7 @@ const Contact = () => {
               id="email"
               name="email"
               className="w-full p-2 mt-1 border rounded-md"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -54,6 +83,7 @@ const Contact = () => {
             name="message"
             rows="4"
             className="w-full p-2 mt-1 border rounded-md"
+            onChange={handleChange}
           ></textarea>
         </div>
         <div className="mt-6">
