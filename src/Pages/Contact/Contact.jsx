@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,6 +24,7 @@ const Contact = () => {
       // Make a POST request to send the email
       await axiosPublic.post("/sendEmail", formData);
       toast.success("Email sent successfully!");
+      navigate("/");
     } catch (error) {
       console.error("Error sending email:", error);
       toast.error("Failed to send email. Please try again.");
