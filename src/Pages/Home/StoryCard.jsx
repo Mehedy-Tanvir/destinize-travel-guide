@@ -9,7 +9,7 @@ const StoryCard = ({ story }) => {
         <div className="md:flex">
           <div className="md:flex-shrink-0">
             <img
-              className="object-cover w-full h-48 md:w-48"
+              className="object-cover object-center w-full h-48 md:h-full md:w-48"
               src={image}
               alt="Story Thumbnail"
             />
