@@ -14,7 +14,7 @@ const Banner = () => {
               delay: "1",
             }}
             src="/bannerGroup.png"
-            className=""
+            className="w-[300px] md:w-[400px] lg:w-[600px]"
           />
           <div className="">
             <motion.h1
